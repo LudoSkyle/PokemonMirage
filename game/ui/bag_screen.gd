@@ -67,7 +67,9 @@ func _process(delta: float) -> void:
 	if _keys == null or is_closed() or Wildgrass.screens.top() != self:
 		return
 	for key in _keys.repeats(delta):
-		_press(key)
+		# Left and right change a pocket, not a place in a list: no repeat.
+		if key == "up" or key == "down":
+			_press(key)
 
 
 ## The id of the line under the cursor; none on Back.

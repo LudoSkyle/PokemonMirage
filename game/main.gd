@@ -133,11 +133,12 @@ func _dress_menu() -> void:
 
 
 ## Mirage's options: the text speed from x0.5 to x4 (x1, 0.02 s a letter,
-## by default), the language, three volumes by steps of five.
+## by default), under an id of its own so that a speed the engine's option
+## kept is not read as Mirage's; the language, three volumes by steps of five.
 func _dress_options() -> void:
 	var options := Wildgrass.options
 	var dialogue := Wildgrass.dialogue
-	options.add_option(&"message_speed", {
+	options.add_option(&"text_speed", {
 		"name": "Vitesse du texte",
 		"values": [0.5, 1.0, 2.0, 4.0],
 		"texts": ["x0.5", "x1", "x2", "x4"],
