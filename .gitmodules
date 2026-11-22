@@ -1,0 +1,3 @@
+[submodule "vendor/WildgrassEngine"]
+	path = vendor/WildgrassEngine
+	url = https://github.com/LudoSkyle/WildgrassEngine.git

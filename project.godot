@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Wildgrass="*res://addons/wildgrass/wildgrass.gd"
 Globals="*res://src/main/kotlin/fr/skyle/pokemonmirage/scripts/autoload/Globals.kt"
 MCPRuntimeServer="*res://addons/godot_mcp_toolkit/runtime/mcp_runtime_server.gd"
 
@@ -27,7 +28,7 @@ window/size/viewport_height=960
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_mcp_toolkit/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_mcp_toolkit/plugin.cfg", "res://addons/wildgrass/plugin.cfg")
 
 [input]
 
