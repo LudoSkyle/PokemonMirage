@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="TileSet" path="res://src/main/kotlin/fr/skyle/pokemonmirage/resources/tilesets/level.tres" id="1_tileset"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/scene_trigger.tscn" id="2_door"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://addons/wildgrass/maps/map.gd" id="wg_map"]
 [ext_resource type="Script" path="res://addons/wildgrass/maps/door.gd" id="wg_door"]
 [ext_resource type="Script" path="res://addons/wildgrass/maps/spawn_point.gd" id="wg_spawn"]
+[ext_resource type="Script" path="res://game/readable.gd" id="mg_readable"]
+[ext_resource type="Script" path="res://addons/wildgrass/story/show_if.gd" id="wg_show_if"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("wg_map")
@@ -104,3 +106,53 @@ transition = &"fade"
 [node name="Spawn" type="Marker2D" parent="."]
 position = Vector2(248, 184)
 script = ExtResource("wg_spawn")
+
+[node name="Twins" type="Node2D" parent="."]
+
+[node name="Books00" type="Node2D" parent="Twins"]
+position = Vector2(232, 120)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books01" type="Node2D" parent="Twins"]
+position = Vector2(248, 120)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Tv02" type="Node2D" parent="Twins"]
+position = Vector2(264, 120)
+script = ExtResource("mg_readable")
+blocks = true
+kind = "tv"
+
+[node name="Tv03" type="Node2D" parent="Twins"]
+position = Vector2(280, 120)
+script = ExtResource("mg_readable")
+blocks = true
+kind = "tv"
+
+[node name="Books04" type="Node2D" parent="Twins"]
+position = Vector2(232, 136)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books05" type="Node2D" parent="Twins"]
+position = Vector2(248, 136)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Tv06" type="Node2D" parent="Twins"]
+position = Vector2(264, 136)
+script = ExtResource("mg_readable")
+blocks = true
+kind = "tv"
+
+[node name="Tv07" type="Node2D" parent="Twins"]
+position = Vector2(280, 136)
+script = ExtResource("mg_readable")
+blocks = true
+kind = "tv"

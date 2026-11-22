@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="TileSet" path="res://src/main/kotlin/fr/skyle/pokemonmirage/resources/tilesets/level.tres" id="1_tileset"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/scene_trigger.tscn" id="2_door"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://addons/wildgrass/maps/map.gd" id="wg_map"]
 [ext_resource type="Script" path="res://addons/wildgrass/maps/door.gd" id="wg_door"]
 [ext_resource type="Script" path="res://addons/wildgrass/maps/spawn_point.gd" id="wg_spawn"]
+[ext_resource type="Script" path="res://game/readable.gd" id="mg_readable"]
+[ext_resource type="Script" path="res://addons/wildgrass/story/show_if.gd" id="wg_show_if"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("wg_map")
@@ -174,3 +176,129 @@ target_door = &"Laboratoire"
 kind = 1
 direction = Vector2i(0, 1)
 transition = &"fade"
+
+[node name="Twins" type="Node2D" parent="."]
+
+[node name="Server00" type="Node2D" parent="Twins"]
+position = Vector2(152, 104)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Un serveur qui ronronne doucement.[page]Il a l'air de contenir des données très importantes."
+
+[node name="Server01" type="Node2D" parent="Twins"]
+position = Vector2(168, 104)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Un serveur qui ronronne doucement.[page]Il a l'air de contenir des données très importantes."
+
+[node name="Clock02" type="Node2D" parent="Twins"]
+position = Vector2(296, 104)
+script = ExtResource("mg_readable")
+blocks = true
+kind = "clock"
+
+[node name="Books03" type="Node2D" parent="Twins"]
+position = Vector2(344, 104)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books04" type="Node2D" parent="Twins"]
+position = Vector2(360, 104)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Server05" type="Node2D" parent="Twins"]
+position = Vector2(152, 120)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Un serveur qui ronronne doucement.[page]Il a l'air de contenir des données très importantes."
+
+[node name="Server06" type="Node2D" parent="Twins"]
+position = Vector2(168, 120)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Un serveur qui ronronne doucement.[page]Il a l'air de contenir des données très importantes."
+
+[node name="Bin07" type="Node2D" parent="Twins"]
+position = Vector2(216, 120)
+script = ExtResource("mg_readable")
+blocks = true
+text = "La poubelle est vide."
+
+[node name="Books08" type="Node2D" parent="Twins"]
+position = Vector2(344, 120)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books09" type="Node2D" parent="Twins"]
+position = Vector2(360, 120)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books18" type="Node2D" parent="Twins"]
+position = Vector2(152, 216)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books19" type="Node2D" parent="Twins"]
+position = Vector2(168, 216)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books20" type="Node2D" parent="Twins"]
+position = Vector2(184, 216)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books21" type="Node2D" parent="Twins"]
+position = Vector2(200, 216)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books22" type="Node2D" parent="Twins"]
+position = Vector2(312, 216)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books23" type="Node2D" parent="Twins"]
+position = Vector2(328, 216)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books24" type="Node2D" parent="Twins"]
+position = Vector2(344, 216)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books25" type="Node2D" parent="Twins"]
+position = Vector2(360, 216)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Healer0" type="Node2D" parent="Twins"]
+position = Vector2(264, 120)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une machine de soin.[page]Elle n'a personne à soigner."
+states = Array[String](["bell_tarnished => [take=tarnished_bell][sound=healed]La machine s'allume et chante trois notes.[page][flag=bell_clean][give=clear_bell]Vous récupérez la Cloche claire !", "bell_clean => Une machine de soin.[page]Elle n'a personne à soigner."])
+ask = "bell_tarnished => Poser la Cloche ternie dans la machine ?"
+
+[node name="Healer1" type="Node2D" parent="Twins"]
+position = Vector2(280, 120)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une machine de soin.[page]Elle n'a personne à soigner."
+states = Array[String](["bell_tarnished => [take=tarnished_bell][sound=healed]La machine s'allume et chante trois notes.[page][flag=bell_clean][give=clear_bell]Vous récupérez la Cloche claire !", "bell_clean => Une machine de soin.[page]Elle n'a personne à soigner."])
+ask = "bell_tarnished => Poser la Cloche ternie dans la machine ?"

@@ -32,10 +32,17 @@ le Kotlin garde son `SubViewport` ; il passera dans `config/display.json`.
      `PlayerCamera`, `CharacterAnimation`, `SceneTrigger` partent.
    - Le générateur de cartes (`tools/mapgen/build.py`) écrit des `WgMap`.
    - L'affichage 320 × 240 × 4 passe par la config `display` du moteur.
+   *Fait* : les cartes, les portes, le joueur, la caméra, l'affichage.
 2. **Dialogues et textes** : `MessageBox`, `ChoiceBox`, `Sign`, `Readable`,
    `StoryText` → le dialogue du moteur, la boîte de Mirage en scène remplaçable
    (`message_box`, son ombre de pixels comprise) ; les balises `@give:`,
    `@reload`… deviennent `[give=…]`, `[reload]`.
+   *Fait* : la boîte de Mirage (`game/ui/message_box.tscn` : son cadre fin,
+   son ombre de pixels, ses choix encadrés et son curseur), les panneaux, les
+   meubles (`game/readable.gd` : texte, horloge, télé, trouvaille) et les
+   obstacles, jumeaux sous `Twins` ; les textes traduits page par page par
+   `game/page_translation.gd` avec les mêmes `locale/*.po`. Les objets donnés
+   viendront avec le sac (étape 4).
 3. **Personnages** : `Npc`, `Roadblock` → `WgWalker`, `WgWander`, `WgTalk`,
    `WgRoadblock`.
 4. **Histoire, sac, sauvegarde, menu, options, titre** : `StoryFlags`,

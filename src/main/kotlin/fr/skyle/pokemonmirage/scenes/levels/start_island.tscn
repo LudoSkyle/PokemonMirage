@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4]
+[gd_scene load_steps=22 format=4]
 
 [ext_resource type="TileSet" uid="uid://c38ht37ho6e3a" path="res://src/main/kotlin/fr/skyle/pokemonmirage/resources/tilesets/level.tres" id="1_ian7c"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/scene_trigger.tscn" id="2_door"]
@@ -17,6 +17,10 @@
 [ext_resource type="Script" path="res://addons/wildgrass/maps/map.gd" id="wg_map"]
 [ext_resource type="Script" path="res://addons/wildgrass/maps/door.gd" id="wg_door"]
 [ext_resource type="Script" path="res://addons/wildgrass/maps/spawn_point.gd" id="wg_spawn"]
+[ext_resource type="Script" path="res://addons/wildgrass/dialogue/interactable.gd" id="wg_block"]
+[ext_resource type="Script" path="res://game/readable.gd" id="mg_readable"]
+[ext_resource type="Script" path="res://addons/wildgrass/story/show_if.gd" id="wg_show_if"]
+[ext_resource type="Script" path="res://addons/wildgrass/dialogue/sign.gd" id="wg_sign"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_stand"]
 size = Vector2(48, 16)
@@ -822,3 +826,244 @@ transition = &"fade"
 [node name="Spawn" type="Marker2D" parent="."]
 position = Vector2(168, 152)
 script = ExtResource("wg_spawn")
+
+[node name="Twins" type="Node2D" parent="."]
+
+[node name="SignLudo" type="Node2D" parent="Twins"]
+position = Vector2(200, 152)
+script = ExtResource("wg_sign")
+blocks = true
+text = "Maison de Ludo.[page]La porte n'est jamais fermée, entrez donc."
+
+[node name="SignLibrary" type="Node2D" parent="Twins"]
+position = Vector2(24, 472)
+script = ExtResource("wg_sign")
+blocks = true
+text = "Bibliothèque de Bourg-Ludo.[page]Entrée libre. On parle à voix basse."
+
+[node name="SignLab" type="Node2D" parent="Twins"]
+position = Vector2(760, 152)
+script = ExtResource("wg_sign")
+blocks = true
+text = "Laboratoire du Professeur.[page]Les Pokémon blessés y sont soignés."
+
+[node name="SignNorth" type="Node2D" parent="Twins"]
+position = Vector2(104, 216)
+script = ExtResource("wg_sign")
+blocks = true
+text = "Route 1.[page]Elle quitte l'île par la falaise."
+
+[node name="SignPier" type="Node2D" parent="Twins"]
+position = Vector2(504, 680)
+script = ExtResource("wg_sign")
+blocks = true
+text = "Jetée du sud.[page]Attention : planches glissantes."
+
+[node name="LampLudo" type="Node2D" parent="Twins"]
+position = Vector2(120, 216)
+script = ExtResource("wg_block")
+blocks = true
+
+[node name="LampNorth" type="Node2D" parent="Twins"]
+position = Vector2(312, 168)
+script = ExtResource("wg_block")
+blocks = true
+
+[node name="LampLibrary" type="Node2D" parent="Twins"]
+position = Vector2(200, 504)
+script = ExtResource("wg_block")
+blocks = true
+
+[node name="LampLab" type="Node2D" parent="Twins"]
+position = Vector2(632, 216)
+script = ExtResource("wg_block")
+blocks = true
+
+[node name="LampSouth" type="Node2D" parent="Twins"]
+position = Vector2(760, 600)
+script = ExtResource("wg_block")
+blocks = true
+
+[node name="LampGarden" type="Node2D" parent="Twins"]
+position = Vector2(280, 648)
+script = ExtResource("wg_block")
+blocks = true
+
+[node name="LampPier" type="Node2D" parent="Twins"]
+position = Vector2(520, 728)
+script = ExtResource("wg_block")
+blocks = true
+
+[node name="LampSquareWest" type="Node2D" parent="Twins"]
+position = Vector2(392, 408)
+script = ExtResource("wg_block")
+blocks = true
+
+[node name="LampSquareEast" type="Node2D" parent="Twins"]
+position = Vector2(520, 408)
+script = ExtResource("wg_block")
+blocks = true
+
+[node name="BellStandEmpty0" type="Node2D" parent="Twins"]
+position = Vector2(456, 344)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Un socle de pierre. Il manque quelque chose dessus."
+states = Array[String](["bell_ribbon => [flag=bell_hung][take=clear_bell][reload][sound=bell]Vous accrochez la cloche. Elle tient."])
+ask = "bell_ribbon => Accrocher la Cloche claire ?"
+
+[node name="ShowIf" type="Node" parent="Twins/BellStandEmpty0"]
+script = ExtResource("wg_show_if")
+condition = "!bell_hung"
+
+[node name="BellStandEmpty1" type="Node2D" parent="Twins"]
+position = Vector2(440, 360)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Un socle de pierre. Il manque quelque chose dessus."
+states = Array[String](["bell_ribbon => [flag=bell_hung][take=clear_bell][reload][sound=bell]Vous accrochez la cloche. Elle tient."])
+ask = "bell_ribbon => Accrocher la Cloche claire ?"
+
+[node name="ShowIf" type="Node" parent="Twins/BellStandEmpty1"]
+script = ExtResource("wg_show_if")
+condition = "!bell_hung"
+
+[node name="BellStandEmpty2" type="Node2D" parent="Twins"]
+position = Vector2(472, 360)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Un socle de pierre. Il manque quelque chose dessus."
+states = Array[String](["bell_ribbon => [flag=bell_hung][take=clear_bell][reload][sound=bell]Vous accrochez la cloche. Elle tient."])
+ask = "bell_ribbon => Accrocher la Cloche claire ?"
+
+[node name="ShowIf" type="Node" parent="Twins/BellStandEmpty2"]
+script = ExtResource("wg_show_if")
+condition = "!bell_hung"
+
+[node name="BellStandEmpty3" type="Node2D" parent="Twins"]
+position = Vector2(440, 376)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Un socle de pierre. Il manque quelque chose dessus."
+states = Array[String](["bell_ribbon => [flag=bell_hung][take=clear_bell][reload][sound=bell]Vous accrochez la cloche. Elle tient."])
+ask = "bell_ribbon => Accrocher la Cloche claire ?"
+
+[node name="ShowIf" type="Node" parent="Twins/BellStandEmpty3"]
+script = ExtResource("wg_show_if")
+condition = "!bell_hung"
+
+[node name="BellStandEmpty4" type="Node2D" parent="Twins"]
+position = Vector2(472, 376)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Un socle de pierre. Il manque quelque chose dessus."
+states = Array[String](["bell_ribbon => [flag=bell_hung][take=clear_bell][reload][sound=bell]Vous accrochez la cloche. Elle tient."])
+ask = "bell_ribbon => Accrocher la Cloche claire ?"
+
+[node name="ShowIf" type="Node" parent="Twins/BellStandEmpty4"]
+script = ExtResource("wg_show_if")
+condition = "!bell_hung"
+
+[node name="BellStand0" type="Node2D" parent="Twins"]
+position = Vector2(440, 360)
+script = ExtResource("mg_readable")
+blocks = true
+text = "La cloche est à sa place.[page]Elle bouge un peu quand le vent passe."
+
+[node name="ShowIf" type="Node" parent="Twins/BellStand0"]
+script = ExtResource("wg_show_if")
+condition = "bell_hung"
+
+[node name="BellStand1" type="Node2D" parent="Twins"]
+position = Vector2(456, 360)
+script = ExtResource("mg_readable")
+blocks = true
+text = "La cloche est à sa place.[page]Elle bouge un peu quand le vent passe."
+
+[node name="ShowIf" type="Node" parent="Twins/BellStand1"]
+script = ExtResource("wg_show_if")
+condition = "bell_hung"
+
+[node name="BellStand2" type="Node2D" parent="Twins"]
+position = Vector2(472, 360)
+script = ExtResource("mg_readable")
+blocks = true
+text = "La cloche est à sa place.[page]Elle bouge un peu quand le vent passe."
+
+[node name="ShowIf" type="Node" parent="Twins/BellStand2"]
+script = ExtResource("wg_show_if")
+condition = "bell_hung"
+
+[node name="BellStand3" type="Node2D" parent="Twins"]
+position = Vector2(440, 376)
+script = ExtResource("mg_readable")
+blocks = true
+text = "La cloche est à sa place.[page]Elle bouge un peu quand le vent passe."
+
+[node name="ShowIf" type="Node" parent="Twins/BellStand3"]
+script = ExtResource("wg_show_if")
+condition = "bell_hung"
+
+[node name="BellStand4" type="Node2D" parent="Twins"]
+position = Vector2(472, 376)
+script = ExtResource("mg_readable")
+blocks = true
+text = "La cloche est à sa place.[page]Elle bouge un peu quand le vent passe."
+
+[node name="ShowIf" type="Node" parent="Twins/BellStand4"]
+script = ExtResource("wg_show_if")
+condition = "bell_hung"
+
+[node name="StatueWest" type="Node2D" parent="Twins"]
+position = Vector2(408, 344)
+script = ExtResource("wg_block")
+blocks = true
+
+[node name="StatueEast" type="Node2D" parent="Twins"]
+position = Vector2(504, 344)
+script = ExtResource("wg_block")
+blocks = true
+
+[node name="ItemPotion" type="Node2D" parent="Twins"]
+position = Vector2(760, 744)
+script = ExtResource("mg_readable")
+blocks = true
+text = "[give=potion]Vous trouvez une Potion ![page]Vous rangez la Potion dans la poche Objets."
+kind = "item"
+flag = "found_island_potion"
+
+[node name="ItemBall" type="Node2D" parent="Twins"]
+position = Vector2(56, 680)
+script = ExtResource("mg_readable")
+blocks = true
+text = "[give=poke_ball]Vous trouvez une Poké Ball ![page]Vous rangez la Poké Ball dans la poche Poké Balls."
+kind = "item"
+flag = "found_island_ball"
+
+[node name="ItemWater" type="Node2D" parent="Twins"]
+position = Vector2(776, 24)
+script = ExtResource("mg_readable")
+blocks = true
+text = "[give=fresh_water]Vous trouvez une Eau Fraîche ![page]Vous rangez l'Eau Fraîche dans la poche Objets."
+kind = "item"
+flag = "found_island_water"
+
+[node name="ItemRevive" type="Node2D" parent="Twins"]
+position = Vector2(312, 424)
+script = ExtResource("mg_readable")
+blocks = true
+text = "[give=revive]Vous trouvez un Rappel ![page]Vous rangez le Rappel dans la poche Objets."
+kind = "item"
+flag = "found_island_revive"
+
+[node name="Bell" type="Node2D" parent="Twins"]
+position = Vector2(568, 760)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Quelque chose brille au fond de l'eau, juste sous le ponton.[page][give=tarnished_bell]Vous repêchez la Cloche ternie ![page]Un banc de poissons s'éparpille dans l'eau sombre."
+kind = "item"
+flag = "bell_tarnished"
+
+[node name="ShowIf" type="Node" parent="Twins/Bell"]
+script = ExtResource("wg_show_if")
+condition = "bell_spotted"

@@ -73,3 +73,7 @@ day_tint={
 "type": "color",
 "value": Color(1, 1, 1, 1)
 }
+
+[wildgrass]
+
+screens/message_box="res://game/ui/message_box.tscn"
