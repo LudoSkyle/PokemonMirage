@@ -52,7 +52,7 @@ menu={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://locale/en.po")
+locale/translations=PackedStringArray("res://locale/en.po", "res://locale/fr.po")
 locale/fallback="fr"
 
 [rendering]
@@ -76,8 +76,10 @@ day_tint={
 
 [wildgrass]
 
+paths/maps="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/"
 screens/message_box="res://game/ui/message_box.tscn"
 screens/item_reveal="res://game/ui/item_reveal.tscn"
 screens/bag="res://game/ui/bag_screen.tscn"
 screens/menu="res://game/ui/menu_screen.tscn"
 screens/options="res://game/ui/options_screen.tscn"
+screens/save="res://game/ui/save_screen.tscn"

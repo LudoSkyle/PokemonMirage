@@ -608,8 +608,8 @@ def build(plan):
         warn.append('%s : aucune case convenable près de %s' % (name, wish)); placed[name] = wish; return wish
     def quote(text): return text.replace('\\', '\\\\').replace('"', '\\"')
     def exit_twin(name, c, scene, door, direction):          # la porte du moteur Wildgrass, jumelle de la SceneTrigger (docs/wildgrass.md)
-        nodes['Exits'].append('[node name="%s" type="Area2D" parent="Exits"]\nposition = Vector2(%d, %d)\nscript = ExtResource("wg_door")\ntarget_map = &"%sscenes/levels/%s.tscn"\ntarget_door = &"%s"\nkind = 0\ndirection = Vector2i(%d, %d)\ntransition = &"fade"\n'
-                              % (name, *px(c), RES, scene, door, *direction))
+        nodes['Exits'].append('[node name="%s" type="Area2D" parent="Exits"]\nposition = Vector2(%d, %d)\nscript = ExtResource("wg_door")\ntarget_map = &"%s"\ntarget_door = &"%s"\nkind = 0\ndirection = Vector2i(%d, %d)\ntransition = &"fade"\n'
+                              % (name, *px(c), scene, door, *direction))
     for name, (kind, x, r, h) in houses.items():
         if h.get('scene'):
             nodes['Doors'].append('[node name="%s" parent="Doors" instance=ExtResource("2_door")]\nposition = Vector2(%d, %d)\ntarget_scene = "%sscenes/levels/%s.tscn"\ntarget_door = "%s"\nentry_direction = Vector2(0, 1)\n'

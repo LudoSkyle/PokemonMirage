@@ -1,0 +1,88 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://game/ui/save_screen.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/ui/frames/rse_01.png" id="2_frame"]
+[ext_resource type="FontFile" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/fonts/pokemon-dp-pro.ttf" id="3_font"]
+
+[sub_resource type="FontVariation" id="menu_font"]
+base_font = ExtResource("3_font")
+spacing_top = -1
+spacing_bottom = -1
+
+[node name="SaveScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_script")
+place = NodePath("Summary/Location")
+time = NodePath("Summary/Time")
+
+[node name="Summary" type="Control" parent="."]
+layout_mode = 0
+offset_left = 4
+offset_top = 4
+offset_right = 140
+offset_bottom = 52
+mouse_filter = 2
+
+[node name="Frame" type="NinePatchRect" parent="Summary"]
+layout_mode = 0
+offset_right = 136
+offset_bottom = 48
+mouse_filter = 2
+texture = ExtResource("2_frame")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Location" type="Label" parent="Summary"]
+layout_mode = 0
+offset_left = 8
+offset_top = 8
+offset_right = 128
+offset_bottom = 24
+theme_override_colors/font_color = Color(0.25098, 0.627451, 0.188235, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = SubResource("menu_font")
+theme_override_font_sizes/font_size = 16
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeName" type="Label" parent="Summary"]
+layout_mode = 0
+offset_left = 8
+offset_top = 24
+offset_right = 128
+offset_bottom = 40
+theme_override_colors/font_color = Color(0.345098, 0.345098, 0.313725, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = SubResource("menu_font")
+theme_override_font_sizes/font_size = 16
+text = "Temps de jeu"
+vertical_alignment = 1
+
+[node name="Time" type="Label" parent="Summary"]
+layout_mode = 0
+offset_left = 8
+offset_top = 24
+offset_right = 128
+offset_bottom = 40
+theme_override_colors/font_color = Color(0.188235, 0.439216, 0.941176, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = SubResource("menu_font")
+theme_override_font_sizes/font_size = 16
+text = "00:00"
+horizontal_alignment = 2
+vertical_alignment = 1

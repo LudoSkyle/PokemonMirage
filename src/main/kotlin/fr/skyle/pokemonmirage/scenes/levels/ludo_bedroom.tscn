@@ -97,7 +97,7 @@ position = Vector2(248, 184)
 [node name="Escalier" type="Area2D" parent="Exits"]
 position = Vector2(184, 136)
 script = ExtResource("wg_door")
-target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/ludo_house.tscn"
+target_map = &"ludo_house"
 target_door = &"Escalier"
 kind = 1
 direction = Vector2i(-1, 0)

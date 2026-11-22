@@ -32,7 +32,7 @@ func test_every_door_leads_to_a_door_of_its_target_map_where_its_twin_stands() -
 			var twin := map.get_node("Doors/" + str(door.name)) as Node2D
 			assert_that((door as Node2D).position).override_failure_message("%s/%s" % [id, door.name]).is_equal(twin.position)
 			assert_that((door as WgDoor).direction).override_failure_message("%s/%s" % [id, door.name]).is_not_equal(Vector2i.ZERO)
-			var target := auto_free((load(String((door as WgDoor).target_map)) as PackedScene).instantiate()) as WgMap
+			var target := auto_free((load(LEVELS + String((door as WgDoor).target_map) + ".tscn") as PackedScene).instantiate()) as WgMap
 			assert_object(target.find_point((door as WgDoor).target_door)).override_failure_message("%s/%s" % [id, door.name]).is_not_null()
 			count += 1
 	assert_int(count).is_equal(23)
