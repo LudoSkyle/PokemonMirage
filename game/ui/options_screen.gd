@@ -15,7 +15,7 @@ const CHOSEN := Color(0.878431, 0.188235, 0.12549, 1.0)
 ## The option of each row of the scene, by the row's name; a row of none
 ## closes the screen.
 @export var row_options: Dictionary[String, StringName] = {
-	"TextSpeed": &"message_speed",
+	"TextSpeed": &"text_speed",
 	"Language": &"language",
 	"MusicVolume": &"music_volume",
 	"CriesVolume": &"cries_volume",

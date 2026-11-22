@@ -27,7 +27,7 @@ func after_test() -> void:
 	Wildgrass.maps.traveller = null
 	Wildgrass.story.reset()
 	Wildgrass.bag.reset()
-	Wildgrass.options.set_value(&"message_speed", 1.0)
+	Wildgrass.options.set_value(&"text_speed", 1.0)
 	Wildgrass.options.set_value(&"language", "fr")
 	Wildgrass.options.set_value(&"music_volume", 100)
 	TranslationServer.set_locale(_locale)
@@ -138,7 +138,7 @@ func test_the_options_rows_their_values_and_their_ends() -> void:
 	await _tap("ui_right")
 	await _tap("ui_right")
 	await _tap("ui_right")
-	assert_float(Wildgrass.options.value(&"message_speed")).is_equal(4.0)
+	assert_float(Wildgrass.options.value(&"text_speed")).is_equal(4.0)
 	assert_float(Wildgrass.dialogue.letters_per_second).is_equal(base * 4.0)
 	assert_that((speeds.get_child(3) as Label).get_theme_color(&"font_color")).is_equal(Color(0.878431, 0.188235, 0.12549, 1.0))
 	await _tap("ui_down")

@@ -49,14 +49,6 @@ func advance(delta: float) -> void:
 	_fly(delta)
 
 
-## Mirage's title shows no column of choices: the key goes straight to Play,
-## which opens the choice of a game.
-func refresh() -> void:
-	_shown = title.shown()
-	if _cursor() < 0 and not _shown.is_empty():
-		cursor = _shown[0]["id"]
-
-
 ## The logo grows in, past its size and back, fading in faster.
 func _arrival(progress: float) -> void:
 	var shown_logo := get_node(logo) as Sprite2D
