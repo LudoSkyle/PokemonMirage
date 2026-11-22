@@ -21,7 +21,11 @@ const WORDS: Array[String] = [
 	"Musique",
 	"Cris des Pokémon",
 	"Autres sons",
+	"Jouer",
 ]
+
+## False: no title, straight to the first map (the tests).
+@export var title := true
 
 var _translations: Array[Translation] = []
 
@@ -43,7 +47,13 @@ func _ready() -> void:
 	_dress_options()
 	Wildgrass.hooks.add(&"save_summary", &"mirage_place", _summary_place)
 	Wildgrass.maps.traveller = PLAYER.instantiate()
-	await Wildgrass.maps.go_to(START_MAP, &"Spawn")
+	if title:
+		# The key on the title always opens the choice of a game: its cards
+		# hold "Nouvelle partie" and "Options".
+		Wildgrass.title.add_choice(&"play", "Jouer", Wildgrass.title.choose_game)
+		Wildgrass.title.start()
+	else:
+		await Wildgrass.maps.go_to(START_MAP, &"Spawn")
 
 
 func _exit_tree() -> void:

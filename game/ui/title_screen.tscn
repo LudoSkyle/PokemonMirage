@@ -1,0 +1,128 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="Script" path="res://game/ui/title_screen.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/ui/title/background.png" id="2_background"]
+[ext_resource type="Texture2D" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/ui/title/clouds_far.png" id="3_clouds_far"]
+[ext_resource type="Texture2D" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/ui/title/tower.png" id="4_tower"]
+[ext_resource type="Texture2D" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/ui/title/clouds_near.png" id="5_clouds_near"]
+[ext_resource type="Texture2D" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/ui/title/logo.png" id="6_logo"]
+[ext_resource type="Texture2D" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/ui/title/prompt.png" id="7_prompt"]
+[ext_resource type="Shader" path="res://src/main/kotlin/fr/skyle/pokemonmirage/resources/shaders/title_clouds.gdshader" id="8_drift"]
+[ext_resource type="Shader" path="res://src/main/kotlin/fr/skyle/pokemonmirage/resources/shaders/title_shine.gdshader" id="9_shine"]
+[sub_resource type="ShaderMaterial" id="drift_far"]
+shader = ExtResource("8_drift")
+shader_parameter/speed = 0.004
+
+[sub_resource type="ShaderMaterial" id="drift_near"]
+shader = ExtResource("8_drift")
+shader_parameter/speed = 0.011
+
+[sub_resource type="ShaderMaterial" id="shine"]
+shader = ExtResource("9_shine")
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="Backdrop" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Sky" type="TextureRect" parent="Backdrop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_background")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="FarClouds" type="TextureRect" parent="Backdrop"]
+material = SubResource("drift_far")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_clouds_far")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="FarFlyers" type="Control" parent="Backdrop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Tower" type="TextureRect" parent="Backdrop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_tower")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="NearFlyers" type="Control" parent="Backdrop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="NearClouds" type="TextureRect" parent="Backdrop"]
+material = SubResource("drift_near")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_clouds_near")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Logo" type="Sprite2D" parent="."]
+texture_filter = 4
+material = SubResource("shine")
+position = Vector2(160, 49.5)
+texture = ExtResource("6_logo")
+
+[node name="Prompt" type="Sprite2D" parent="."]
+position = Vector2(160, 209)
+texture = ExtResource("7_prompt")
+
+[node name="Veil" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

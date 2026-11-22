@@ -1052,3 +1052,6 @@ msgstr "Speed: x8"
 
 msgid "La partie n'a pas pu être sauvegardée."
 msgstr "The game could not be saved."
+
+msgid "Jouer"
+msgstr "Play"

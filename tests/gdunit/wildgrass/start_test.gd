@@ -30,6 +30,7 @@ func _map_name() -> String:
 
 func test_down_the_stairs_and_out_of_the_house() -> void:
 	_main = MAIN.instantiate()
+	_main.title = false
 	add_child(_main)
 	await _settled()
 	var player := Wildgrass.maps.traveller as WgWalker

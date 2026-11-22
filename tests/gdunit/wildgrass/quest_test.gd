@@ -33,6 +33,7 @@ func after_test() -> void:
 
 func _start() -> WgWalker:
 	_main = MAIN.instantiate()
+	_main.title = false
 	add_child(_main)
 	await _settled()
 	return Wildgrass.maps.traveller as WgWalker

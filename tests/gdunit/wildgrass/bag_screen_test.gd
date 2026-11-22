@@ -35,6 +35,7 @@ func after_test() -> void:
 ## The game started, the bag filled as the debug tool does, then opened.
 func _open(filled := true) -> void:
 	_main = MAIN.instantiate()
+	_main.title = false
 	add_child(_main)
 	for frame in 600:
 		if Wildgrass.maps.current != null and not Wildgrass.maps.is_changing:
