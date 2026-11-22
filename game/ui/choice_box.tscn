@@ -1,0 +1,105 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://game/ui/choice_box.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/ui/frames/rse_01.png" id="2_frame"]
+[ext_resource type="FontFile" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/fonts/pokemon-dp-pro.ttf" id="3_font"]
+[ext_resource type="Texture2D" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/ui/cursor.png" id="4_cursor"]
+
+[sub_resource type="FontVariation" id="menu_font"]
+base_font = ExtResource("3_font")
+spacing_top = -1
+spacing_bottom = -1
+
+[node name="ChoiceBox" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 72
+offset_bottom = 80
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="Frame" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 72
+offset_bottom = 80
+mouse_filter = 2
+texture = ExtResource("2_frame")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Cursor" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 9
+offset_top = 11
+offset_right = 15
+offset_bottom = 21
+mouse_filter = 2
+texture = ExtResource("4_cursor")
+expand_mode = 1
+
+[node name="Entries" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 18
+offset_top = 8
+offset_right = 66
+offset_bottom = 72
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Entry0" type="Label" parent="Entries"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.345098, 0.345098, 0.313725, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = SubResource("menu_font")
+theme_override_font_sizes/font_size = 16
+vertical_alignment = 1
+
+[node name="Entry1" type="Label" parent="Entries"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.345098, 0.345098, 0.313725, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = SubResource("menu_font")
+theme_override_font_sizes/font_size = 16
+vertical_alignment = 1
+
+[node name="Entry2" type="Label" parent="Entries"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.345098, 0.345098, 0.313725, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = SubResource("menu_font")
+theme_override_font_sizes/font_size = 16
+vertical_alignment = 1
+
+[node name="Entry3" type="Label" parent="Entries"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.345098, 0.345098, 0.313725, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = SubResource("menu_font")
+theme_override_font_sizes/font_size = 16
+vertical_alignment = 1
+
+[node name="Entry4" type="Label" parent="Entries"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.345098, 0.345098, 0.313725, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = SubResource("menu_font")
+theme_override_font_sizes/font_size = 16
+vertical_alignment = 1
