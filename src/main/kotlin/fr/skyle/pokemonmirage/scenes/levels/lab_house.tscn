@@ -1,11 +1,17 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="TileSet" path="res://src/main/kotlin/fr/skyle/pokemonmirage/resources/tilesets/level.tres" id="1_tileset"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/scene_trigger.tscn" id="2_door"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/readable.tscn" id="3_readable"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/characters/npc.tscn" id="4_npc"]
+[ext_resource type="Script" path="res://addons/wildgrass/maps/map.gd" id="wg_map"]
+[ext_resource type="Script" path="res://addons/wildgrass/maps/door.gd" id="wg_door"]
+[ext_resource type="Script" path="res://addons/wildgrass/maps/spawn_point.gd" id="wg_spawn"]
 
 [node name="Level" type="Node2D"]
+script = ExtResource("wg_map")
+entities = NodePath("World/Entities")
+size = Vector2i(32, 20)
 metadata/location = "Laboratoire"
 metadata/banner = "metal"
 metadata/music = "elm_lab"
@@ -148,3 +154,23 @@ position = Vector2(280, 120)
 text = "Une machine de soin.|Elle n'a personne à soigner."
 states = PackedStringArray("bell_tarnished > @take:tarnished_bell @sound:healed La machine s'allume et chante trois notes.|@flag:bell_clean @give:clear_bell Vous récupérez la Cloche claire !", "bell_clean > Une machine de soin.|Elle n'a personne à soigner.")
 ask = "bell_tarnished > Poser la Cloche ternie dans la machine ?"
+
+[node name="Exits" type="Node2D" parent="."]
+
+[node name="Entree" type="Area2D" parent="Exits"]
+position = Vector2(248, 248)
+script = ExtResource("wg_door")
+target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/start_island.tscn"
+target_door = &"Laboratoire"
+kind = 1
+direction = Vector2i(0, 1)
+transition = &"fade"
+
+[node name="EntreeBis" type="Area2D" parent="Exits"]
+position = Vector2(264, 248)
+script = ExtResource("wg_door")
+target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/start_island.tscn"
+target_door = &"Laboratoire"
+kind = 1
+direction = Vector2i(0, 1)
+transition = &"fade"

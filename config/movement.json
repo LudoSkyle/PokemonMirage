@@ -1,0 +1,1 @@
+{ "actions": { "up": "ui_up", "down": "ui_down", "left": "ui_left", "right": "ui_right", "run": "run", "interact": "interact", "menu": "menu" } }

@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="TileSet" path="res://src/main/kotlin/fr/skyle/pokemonmirage/resources/tilesets/level.tres" id="1_tileset"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/scene_trigger.tscn" id="2_door"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/readable.tscn" id="3_readable"]
+[ext_resource type="Script" path="res://addons/wildgrass/maps/map.gd" id="wg_map"]
+[ext_resource type="Script" path="res://addons/wildgrass/maps/door.gd" id="wg_door"]
+[ext_resource type="Script" path="res://addons/wildgrass/maps/spawn_point.gd" id="wg_spawn"]
 
 [node name="Level" type="Node2D"]
+script = ExtResource("wg_map")
+entities = NodePath("World/Entities")
+size = Vector2i(32, 20)
 metadata/location = "Maison de Ludo"
 metadata/banner = "wood"
 metadata/music = "new_bark_town"
@@ -83,3 +89,18 @@ kind = "tv"
 
 [node name="SpawnPoint" type="Node2D" parent="."]
 position = Vector2(248, 184)
+
+[node name="Exits" type="Node2D" parent="."]
+
+[node name="Escalier" type="Area2D" parent="Exits"]
+position = Vector2(184, 136)
+script = ExtResource("wg_door")
+target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/ludo_house.tscn"
+target_door = &"Escalier"
+kind = 1
+direction = Vector2i(-1, 0)
+transition = &"fade"
+
+[node name="Spawn" type="Marker2D" parent="."]
+position = Vector2(248, 184)
+script = ExtResource("wg_spawn")
