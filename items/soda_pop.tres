@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WgItem" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://addons/wildgrass/bag/item.gd" id="1_item"]
+[ext_resource type="Texture2D" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/items/icons/soda_pop.png" id="2_icon"]
+
+[resource]
+script = ExtResource("1_item")
+id = &"soda_pop"
+name = "Soda Cool"
+description = "Une boisson pétillante et sucrée. Elle redonne du tonus."
+pocket = &"items"
+position = 6
+icon = ExtResource("2_icon")

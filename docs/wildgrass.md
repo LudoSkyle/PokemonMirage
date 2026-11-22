@@ -62,6 +62,14 @@ le Kotlin garde son `SubViewport` ; il passera dans `config/display.json`.
    `PauseMenu`, `OptionsMenu`, `TitleScreen` → les services et écrans du moteur,
    habillés par des scènes de Mirage. Les quêtes à étapes de Mirage restent au
    jeu, en outils de la page Game.
+   *Fait* : les objets, un `items/<id>.tres` chacun (le chemin par défaut du
+   moteur, textes en français traduits par les `.po`) ; les trois poches de
+   `config/bag.json` ; la présentation d'un objet rare
+   (`game/ui/item_reveal.tscn`, son cadre et son fondu) ; le français par défaut
+   (`config/language.json`). L'histoire du moteur décide aussi des meubles
+   Kotlin qui en dépendent (le socle de la cloche, les archives), et quitter
+   une carte par une porte applique son `on_leave` : la quête de la cloche se
+   joue d'un bout à l'autre sur le moteur.
 5. **Pokémon** : `Species`, `NationalDex`, `Pokedex`, `RegionalDex`,
    `PokedexMenu`, `WildEncounters` → le moteur, le pack de données lu par sa
    couche Studio.

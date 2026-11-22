@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="WgItem" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://addons/wildgrass/bag/item.gd" id="1_item"]
+[ext_resource type="Texture2D" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/items/icons/town_map.png" id="2_icon"]
+
+[resource]
+script = ExtResource("1_item")
+id = &"town_map"
+name = "Carte du village"
+description = "Un plan de Bourg-Ludo et de ses environs, dessiné à la main."
+pocket = &"key_items"
+position = 12
+icon = ExtResource("2_icon")
+consumed = false

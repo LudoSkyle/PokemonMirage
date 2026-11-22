@@ -77,3 +77,4 @@ day_tint={
 [wildgrass]
 
 screens/message_box="res://game/ui/message_box.tscn"
+screens/item_reveal="res://game/ui/item_reveal.tscn"
