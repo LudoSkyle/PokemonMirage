@@ -79,3 +79,5 @@ day_tint={
 screens/message_box="res://game/ui/message_box.tscn"
 screens/item_reveal="res://game/ui/item_reveal.tscn"
 screens/bag="res://game/ui/bag_screen.tscn"
+screens/menu="res://game/ui/menu_screen.tscn"
+screens/options="res://game/ui/options_screen.tscn"
