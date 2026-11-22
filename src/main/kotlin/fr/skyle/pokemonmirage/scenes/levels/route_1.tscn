@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4]
+[gd_scene load_steps=17 format=4]
 
 [ext_resource type="TileSet" uid="uid://c38ht37ho6e3a" path="res://src/main/kotlin/fr/skyle/pokemonmirage/resources/tilesets/level.tres" id="1_ian7c"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/scene_trigger.tscn" id="2_door"]
@@ -13,6 +13,9 @@
 [ext_resource type="Script" path="res://game/readable.gd" id="mg_readable"]
 [ext_resource type="Script" path="res://addons/wildgrass/story/show_if.gd" id="wg_show_if"]
 [ext_resource type="Script" path="res://addons/wildgrass/dialogue/sign.gd" id="wg_sign"]
+[ext_resource type="PackedScene" path="res://game/npc.tscn" id="mg_npc"]
+[ext_resource type="Script" path="res://addons/wildgrass/dialogue/talk.gd" id="wg_talk"]
+[ext_resource type="Script" path="res://addons/wildgrass/walking/wander.gd" id="wg_wander"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("wg_map")
@@ -441,3 +444,64 @@ position = Vector2(1096, 600)
 script = ExtResource("mg_readable")
 blocks = true
 text = "La route continue vers l'est.[page]Le chemin n'est pas encore tracé au-delà."
+
+[node name="Characters" type="Node2D" parent="Twins"]
+process_mode = 4
+visible = false
+
+[node name="RouteCamper" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(296, 616)
+
+[node name="Sprite" parent="Twins/Characters/RouteCamper" index="2"]
+appearance = "hgss_camper"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/RouteCamper"]
+script = ExtResource("wg_talk")
+text = "La rivière a creusé son lit bien en dessous de nous.[page]Aucun sentier n'y descend : il faut prendre les ponts."
+
+[node name="RouteLass" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(152, 584)
+facing = Vector2i(-1, 0)
+
+[node name="Sprite" parent="Twins/Characters/RouteLass" index="2"]
+appearance = "hgss_lass"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/RouteLass"]
+script = ExtResource("wg_talk")
+text = "D'ici, on voit les poissons remonter le courant.[page]Dommage qu'on ne puisse pas descendre jusqu'à l'eau."
+
+[node name="RoutePicnicker" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(792, 472)
+
+[node name="Sprite" parent="Twins/Characters/RoutePicnicker" index="2"]
+appearance = "hgss_picnicker"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/RoutePicnicker"]
+script = ExtResource("wg_talk")
+text = "D'ici, on voit la rivière se séparer en trois.[page]Par temps clair, on devine même le toit du laboratoire."
+
+[node name="RouteYoungster" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(296, 184)
+
+[node name="Sprite" parent="Twins/Characters/RouteYoungster" index="2"]
+appearance = "hgss_youngster"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/RouteYoungster"]
+script = ExtResource("wg_talk")
+text = "Ce rebord de roche ne se remonte pas.[page]Pour aller au nord, il faut faire le tour par les hautes herbes."
+
+[node name="RouteBugCatcher" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(728, 712)
+pace = 2
+
+[node name="Sprite" parent="Twins/Characters/RouteBugCatcher" index="2"]
+appearance = "frlg_bugcatcher"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/RouteBugCatcher"]
+script = ExtResource("wg_talk")
+text = "Les Pokémon de la route sont plus vifs que ceux de l'île.[page]J'en ai vu un filer entre mes jambes !"
+
+[node name="Wander" type="Node" parent="Twins/Characters/RouteBugCatcher"]
+script = ExtResource("wg_wander")
+pause = Vector2(2, 5)
+layer = NodePath("Background/Grass")

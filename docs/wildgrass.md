@@ -45,6 +45,15 @@ le Kotlin garde son `SubViewport` ; il passera dans `config/display.json`.
    viendront avec le sac (étape 4).
 3. **Personnages** : `Npc`, `Roadblock` → `WgWalker`, `WgWander`, `WgTalk`,
    `WgRoadblock`.
+   *Fait* : chaque PNJ a son jumeau sous `Twins/Characters`, caché et arrêté
+   (le Kotlin garde les siens) : un `game/npc.tscn` habillé par
+   `game/character_sprite.gd` (la planche de `assets/characters`, ou le fichier
+   de l'espèce pour un `pkmn_`), sa parole (`WgTalk`, le nom coloré selon le
+   genre), sa promenade (`WgWander`, bornée par une zone ou par un calque comme
+   `Background/Grass`) ou sa ronde (`WgPatrol`), sa présence (`WgShowIf`).
+   Le crochet `map_built` de `game/main.gd` retire les PNJ Kotlin et met les
+   jumeaux sous `World/Entities`. Le passage gardé du nord de l'île est un
+   `WgRoadblock` sous `Twins`.
 4. **Histoire, sac, sauvegarde, menu, options, titre** : `StoryFlags`,
    `Inventory`, `Items`, `ItemReveal`, `SaveGame`, `SaveMenu`, `SaveSlots`,
    `PauseMenu`, `OptionsMenu`, `TitleScreen` → les services et écrans du moteur,
