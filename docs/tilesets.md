@@ -193,8 +193,9 @@ Le même calque sert de zone d'errance à un PNJ ([npcs.md](npcs.md)).
 
 ## Le sable qui garde les pas
 
-Une tuile de sable porte la donnée perso **`sand`** — la première des deux
-couches de données du TileSet (`custom_data_layer_0`, type booléen) :
+Une tuile de sable porte la donnée perso **`footprints`** — la première des
+couches de données du TileSet (`custom_data_layer_0`, type booléen), au nom que
+lit le moteur :
 
 ```
 11:14/0/custom_data_0 = true
@@ -250,7 +251,7 @@ la mer `5:6,32`, l'eau claire `5:9,31`, l'eau profonde `5:5,34` `5:6,34`
 `5:6,35`.
 
 **Ni le rivage ni les tuiles mixtes** : `5:15-17,31-33` sont à moitié du sable,
-et portent déjà `sand`. Une tuile est l'un ou l'autre — ce qui se foule, ou ce
+et portent déjà `footprints`. Une tuile est l'un ou l'autre — ce qui se foule, ou ce
 dans quoi on se mire.
 
 Un personnage posé au bord d'une de ces cases y voit son reflet, en temps réel
@@ -329,9 +330,9 @@ Les rochers :
   est bleu et pas clair s'en va, l'écume reste). Les reflets se rangent juste
   au-dessus de `Ground` : le sable du bord les recouvre. D'une seule pièce, le
   reflet s'étalait sur le sable ;
-- **les données `water` et `sand`** : l'eau, l'eau profonde, les bords `sand…`
+- **les données `water` et `footprints`** : l'eau, l'eau profonde, les bords `sand…`
   et `shore…` portent `water` (reflet, ombre bleue des volants) ; `sand5` porte
-  `sand` (traces de pas). Sur la Route 1 cela ne change rien à pied — on n'y
+  `footprints` (traces de pas). Sur la Route 1 cela ne change rien à pied — on n'y
   touche jamais l'eau — sauf l'ombre des volants au-dessus de la rivière ;
 - **les coins rentrants du sable ne sont pas rangés comme ceux des falaises** :
   l'eau de `sandi` est en bas à gauche, celle de `sandk` en haut à gauche

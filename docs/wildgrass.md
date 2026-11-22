@@ -53,7 +53,10 @@ le Kotlin garde son `SubViewport` ; il passera dans `config/display.json`.
    `Background/Grass`) ou sa ronde (`WgPatrol`), sa présence (`WgShowIf`).
    Le crochet `map_built` de `game/main.gd` retire les PNJ Kotlin et met les
    jumeaux sous `World/Entities`. Le passage gardé du nord de l'île est un
-   `WgRoadblock` sous `Twins`.
+   `WgRoadblock` sous `Twins`. Les traces de pas sont venues avec eux : la
+   donnée de tuile `sand` s'appelle `footprints`, le nom que lit le moteur
+   (le Kotlin aussi), et `config/footprints.json` lui donne la planche de
+   Mirage.
 4. **Histoire, sac, sauvegarde, menu, options, titre** : `StoryFlags`,
    `Inventory`, `Items`, `ItemReveal`, `SaveGame`, `SaveMenu`, `SaveSlots`,
    `PauseMenu`, `OptionsMenu`, `TitleScreen` → les services et écrans du moteur,

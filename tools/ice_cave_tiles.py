@@ -39,7 +39,7 @@ OUTPUT = os.path.join(LEVELS, 'ice_cavern.png')
 TILESET = os.path.join(os.path.dirname(LEVELS.rstrip('/')), '..', 'resources', 'tilesets', 'level.tres')
 RES = 'res://src/main/kotlin/fr/skyle/pokemonmirage/'
 SOURCE_ID, TEXTURE_ID = 16, '11_ice_cavern'
-ICE_LAYER = 3          # la couche de données perso `ice` du TileSet (0 `sand`, 1 `water`, 2 `jump`)
+ICE_LAYER = 3          # la couche de données perso `ice` du TileSet (0 `footprints`, 1 `water`, 2 `jump`)
 COPIED = (11, 16)          # ce qui est repris tel quel de la planche source : ses onze premières colonnes, seize rangées
 
 # Les matières à bords — nom : (colonne, rangée) du bloc 3 x 3, (colonne, rangée) de ses coins rentrants 2 x 2, et
