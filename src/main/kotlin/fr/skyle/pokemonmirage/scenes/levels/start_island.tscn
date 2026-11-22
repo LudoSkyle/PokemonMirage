@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4]
+[gd_scene load_steps=27 format=4]
 
 [ext_resource type="TileSet" uid="uid://c38ht37ho6e3a" path="res://src/main/kotlin/fr/skyle/pokemonmirage/resources/tilesets/level.tres" id="1_ian7c"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/scene_trigger.tscn" id="2_door"]
@@ -21,6 +21,11 @@
 [ext_resource type="Script" path="res://game/readable.gd" id="mg_readable"]
 [ext_resource type="Script" path="res://addons/wildgrass/story/show_if.gd" id="wg_show_if"]
 [ext_resource type="Script" path="res://addons/wildgrass/dialogue/sign.gd" id="wg_sign"]
+[ext_resource type="PackedScene" path="res://game/npc.tscn" id="mg_npc"]
+[ext_resource type="Script" path="res://addons/wildgrass/walking/patrol.gd" id="wg_patrol"]
+[ext_resource type="Script" path="res://addons/wildgrass/walking/roadblock.gd" id="wg_roadblock"]
+[ext_resource type="Script" path="res://addons/wildgrass/dialogue/talk.gd" id="wg_talk"]
+[ext_resource type="Script" path="res://addons/wildgrass/walking/wander.gd" id="wg_wander"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_stand"]
 size = Vector2(48, 16)
@@ -1067,3 +1072,527 @@ flag = "bell_tarnished"
 [node name="ShowIf" type="Node" parent="Twins/Bell"]
 script = ExtResource("wg_show_if")
 condition = "bell_spotted"
+
+[node name="Characters" type="Node2D" parent="Twins"]
+process_mode = 4
+visible = false
+
+[node name="GuardWest" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(56, 56)
+
+[node name="Sprite" parent="Twins/Characters/GuardWest" index="2"]
+appearance = "dppt_worker"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/GuardWest"]
+script = ExtResource("wg_talk")
+text = "Désolé, le passage est fermé.[page]C'est dangereux par là : la Route 1 n'est pas encore sûre."
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/GuardWest"]
+script = ExtResource("wg_show_if")
+condition = "!bell_hung"
+
+[node name="GuardEast" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(88, 56)
+
+[node name="Sprite" parent="Twins/Characters/GuardEast" index="2"]
+appearance = "dppt_worker"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/GuardEast"]
+script = ExtResource("wg_talk")
+text = "Désolé, le passage est fermé.[page]C'est dangereux par là : la Route 1 n'est pas encore sûre."
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/GuardEast"]
+script = ExtResource("wg_show_if")
+condition = "!bell_hung"
+
+[node name="Runner" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(376, 312)
+pace = 3
+
+[node name="Sprite" parent="Twins/Characters/Runner" index="2"]
+appearance = "rse_triathlete_m"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/Runner"]
+script = ExtResource("wg_talk")
+text = "Pff... pff... Je fais le tour de la place tous les matins.[page]Ne reste pas au milieu du chemin, je perds mon rythme."
+
+[node name="Patrol" type="Node" parent="Twins/Characters/Runner"]
+script = ExtResource("wg_patrol")
+route = Array[Vector2i]([Vector2i(23, 19), Vector2i(33, 19), Vector2i(33, 26), Vector2i(23, 26)])
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/Runner"]
+script = ExtResource("wg_show_if")
+condition = "!bell_hung"
+
+[node name="Fisher" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(536, 776)
+
+[node name="Sprite" parent="Twins/Characters/Fisher" index="2"]
+appearance = "hgss_fisherman"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/Fisher"]
+script = ExtResource("wg_talk")
+text = "Chut... Ça ne mord pas fort aujourd'hui.[page]Il paraît qu'il y a de gros poissons au large."
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/Fisher"]
+script = ExtResource("wg_show_if")
+condition = "!bell_hung"
+
+[node name="Roland" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(120, 584)
+facing = Vector2i(1, 0)
+
+[node name="Sprite" parent="Twins/Characters/Roland" index="2"]
+appearance = "frlg_ruinmaniac"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/Roland"]
+script = ExtResource("wg_talk")
+text = "Ces eaux, j'y ai plongé vingt ans.[page]Elles ont encore des choses à dire, je le sens."
+states = Array[String](["bell_register => [flag=bell_spotted]Au bout de la jetée du sud, là où l'eau est profonde...[page]...il y a quelque chose qui accroche la lumière.[page]Moi, je n'y plonge plus. Trop froid, trop de courant.", "bell_tarnished => Alors c'était ça qui brillait.[page]Une cloche. Vingt ans que je passe au-dessus."])
+speaker = "Roland"
+speaker_color = Color(0.188235, 0.313725, 0.784314, 1)
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/Roland"]
+script = ExtResource("wg_show_if")
+condition = "!bell_hung"
+
+[node name="GrassWatcher" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(248, 680)
+pace = 2
+
+[node name="Sprite" parent="Twins/Characters/GrassWatcher" index="2"]
+appearance = "frlg_bugcatcher"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/GrassWatcher"]
+script = ExtResource("wg_talk")
+text = "Ces herbes sont si hautes qu'on s'y perd.[page]Je cherche des insectes, mais je n'ai encore rien trouvé."
+states = Array[String](["bell_hung => Il paraît que c'est toi qui as retrouvé la cloche ! Bravo ![page]Moi, toujours pas le moindre insecte."])
+
+[node name="Wander" type="Node" parent="Twins/Characters/GrassWatcher"]
+script = ExtResource("wg_wander")
+pause = Vector2(2, 5)
+layer = NodePath("Background/Grass")
+
+[node name="BenchLady" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(184, 232)
+
+[node name="Sprite" parent="Twins/Characters/BenchLady" index="2"]
+appearance = "rse_expert_f"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/BenchLady"]
+script = ExtResource("wg_talk")
+text = "Je viens m'asseoir ici tous les matins.[page]D'ici, on voit passer tout le village."
+states = Array[String](["bell_hung => Je viens toujours m'asseoir ici le matin.[page]Maintenant, j'attends que la cloche sonne pour rentrer."])
+
+[node name="Sunbather" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(456, 584)
+
+[node name="Sprite" parent="Twins/Characters/Sunbather" index="2"]
+appearance = "hgss_swimmer_f"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/Sunbather"]
+script = ExtResource("wg_talk")
+text = "Le sable est chaud, l'eau est fraîche.[page]Je ne bouge plus d'ici avant la nuit."
+states = Array[String](["bell_hung => J'ai entendu la cloche depuis ma serviette.[page]Je n'ai pas bougé pour autant."])
+
+[node name="Swimmer" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(408, 248)
+
+[node name="Sprite" parent="Twins/Characters/Swimmer" index="2"]
+appearance = "hgss_swimmer_m"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/Swimmer"]
+script = ExtResource("wg_talk")
+text = "Le sable de la crique est le plus fin de l'île.[page]Et les falaises coupent le vent : on y est bien."
+states = Array[String](["bell_hung => J'étais dans l'eau quand la cloche a sonné.[page]J'ai bu la tasse. Ça valait le coup."])
+
+[node name="ShellKid" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(472, 216)
+
+[node name="Sprite" parent="Twins/Characters/ShellKid" index="2"]
+appearance = "hgss_tuber_m"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/ShellKid"]
+script = ExtResource("wg_talk")
+text = "Je cherche des coquillages.[page]Pour l'instant, j'ai surtout trouvé des cailloux."
+states = Array[String](["bell_hung => J'ai trouvé un coquillage qui fait le bruit de la cloche ![page]Bon, il faut l'écouter de très près."])
+
+[node name="Sailor" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(728, 280)
+
+[node name="Sprite" parent="Twins/Characters/Sailor" index="2"]
+appearance = "hgss_sailor"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/Sailor"]
+script = ExtResource("wg_talk")
+text = "Tu vois ces rochers, au large ?[page]Ils ferment toutes les passes.[page]Aucun bateau n'entre dans la baie, aucun n'en sort."
+states = Array[String](["bell_hung => Les rochers ferment toujours les passes.[page]Mais une cloche, ça s'entend du large.[page]Les bateaux sauront qu'il y a un village ici."])
+
+[node name="Youngster" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(776, 216)
+facing = Vector2i(1, 0)
+pace = 2
+
+[node name="Sprite" parent="Twins/Characters/Youngster" index="2"]
+appearance = "hgss_youngster"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/Youngster"]
+script = ExtResource("wg_talk")
+text = "Le Professeur dit que des Pokémon vivent dans ces herbes.[page]Sans le mien, je n'ose pas y mettre un pied."
+states = Array[String](["bell_hung => C'est toi qui as rapporté la cloche ? Tout seul ?[page]Alors moi, je peux bien entrer dans ces herbes. Demain."])
+
+[node name="Wander" type="Node" parent="Twins/Characters/Youngster"]
+script = ExtResource("wg_wander")
+pause = Vector2(2, 5)
+area = Rect2i(47, 11, 7, 6)
+
+[node name="Gardener" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(792, 520)
+facing = Vector2i(-1, 0)
+
+[node name="Sprite" parent="Twins/Characters/Gardener" index="2"]
+appearance = "hgss_npc_midage_woman"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/Gardener"]
+script = ExtResource("wg_talk")
+text = "Ici, les fleurs poussent toutes seules.[page]Je me contente de les regarder."
+states = Array[String](["bell_hung => Depuis la Veillée, je jardine en fredonnant.[page]Ma sœur dit que je chante faux. Les fleurs ne se plaignent pas."])
+
+[node name="OdileAfter" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(440, 392)
+facing = Vector2i(0, -1)
+
+[node name="Sprite" parent="Twins/Characters/OdileAfter" index="2"]
+appearance = "dppt_socialite"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/OdileAfter"]
+script = ExtResource("wg_talk")
+text = "J'ai finalement fait le déplacement. Je voulais l'entendre de près.[page]Merci.[page]*Kraak* ...MON DOS !!!"
+speaker = "Mémé Odile"
+speaker_color = Color(0.878431, 0.188235, 0.156863, 1)
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/OdileAfter"]
+script = ExtResource("wg_show_if")
+condition = "bell_hung, !vigil_over"
+
+[node name="FisherAfter" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(472, 392)
+facing = Vector2i(0, -1)
+
+[node name="Sprite" parent="Twins/Characters/FisherAfter" index="2"]
+appearance = "hgss_fisherman"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/FisherAfter"]
+script = ExtResource("wg_talk")
+text = "J'ai laissé ma canne là-bas. Pour une fois."
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/FisherAfter"]
+script = ExtResource("wg_show_if")
+condition = "bell_hung, !vigil_over"
+
+[node name="AlixAfter" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(424, 360)
+facing = Vector2i(1, 0)
+
+[node name="Sprite" parent="Twins/Characters/AlixAfter" index="2"]
+appearance = "frlg_aromalady"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/AlixAfter"]
+script = ExtResource("wg_talk")
+text = "J'ai fermé la bibliothèque pour ce soir.[page]Il y a des choses qu'on n'apprend pas dans les livres."
+speaker = "Alix"
+speaker_color = Color(0.878431, 0.188235, 0.156863, 1)
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/AlixAfter"]
+script = ExtResource("wg_show_if")
+condition = "bell_hung, !vigil_over"
+
+[node name="WorkerAfter" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(520, 392)
+facing = Vector2i(-1, 0)
+
+[node name="Sprite" parent="Twins/Characters/WorkerAfter" index="2"]
+appearance = "dppt_worker"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/WorkerAfter"]
+script = ExtResource("wg_talk")
+text = "La Route 1 est ouverte.[page]On a fini juste à temps pour la Veillée."
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/WorkerAfter"]
+script = ExtResource("wg_show_if")
+condition = "bell_hung, !vigil_over"
+
+[node name="WorkerAfter2" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(520, 440)
+facing = Vector2i(0, -1)
+
+[node name="Sprite" parent="Twins/Characters/WorkerAfter2" index="2"]
+appearance = "dppt_worker"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/WorkerAfter2"]
+script = ExtResource("wg_talk")
+text = "Les outils sont rangés.[page]Ce soir on ne répare rien : on écoute."
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/WorkerAfter2"]
+script = ExtResource("wg_show_if")
+condition = "bell_hung, !vigil_over"
+
+[node name="VisitorHiker" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(488, 392)
+facing = Vector2i(-1, 0)
+
+[node name="Sprite" parent="Twins/Characters/VisitorHiker" index="2"]
+appearance = "hgss_picnicker"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/VisitorHiker"]
+script = ExtResource("wg_talk")
+text = "On l'entendait depuis l'autre rive !"
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/VisitorHiker"]
+script = ExtResource("wg_show_if")
+condition = "bell_hung, !vigil_over"
+
+[node name="VisitorChild" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(440, 440)
+facing = Vector2i(0, -1)
+
+[node name="Sprite" parent="Twins/Characters/VisitorChild" index="2"]
+appearance = "frlg_twins"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/VisitorChild"]
+script = ExtResource("wg_talk")
+text = "Elle est toute petite, la cloche ! Mais elle fait un grand bruit !"
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/VisitorChild"]
+script = ExtResource("wg_show_if")
+condition = "bell_hung, !vigil_over"
+
+[node name="VisitorWaitress" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(392, 360)
+facing = Vector2i(1, 0)
+
+[node name="Sprite" parent="Twins/Characters/VisitorWaitress" index="2"]
+appearance = "rse_npc_pike_maid"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/VisitorWaitress"]
+script = ExtResource("wg_talk")
+text = "Si j'avais su, j'aurais apporté de quoi nourrir tout ce monde."
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/VisitorWaitress"]
+script = ExtResource("wg_show_if")
+condition = "bell_hung, !vigil_over"
+
+[node name="VisitorKalos" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(104, 248)
+
+[node name="Sprite" parent="Twins/Characters/VisitorKalos" index="2"]
+appearance = "hgss_hiker"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/VisitorKalos"]
+script = ExtResource("wg_talk")
+text = "J'ai traversé toute la forêt pour venir. Ça valait la marche."
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/VisitorKalos"]
+script = ExtResource("wg_show_if")
+condition = "bell_hung, !vigil_over"
+
+[node name="VisitorFestival" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(504, 664)
+facing = Vector2i(0, -1)
+
+[node name="Sprite" parent="Twins/Characters/VisitorFestival" index="2"]
+appearance = "hgss_lass"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/VisitorFestival"]
+script = ExtResource("wg_talk")
+text = "Une Veillée ! Ma grand-mère m'en parlait tout le temps."
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/VisitorFestival"]
+script = ExtResource("wg_show_if")
+condition = "bell_hung, !vigil_over"
+
+[node name="VisitorBlackBelt" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(40, 168)
+
+[node name="Sprite" parent="Twins/Characters/VisitorBlackBelt" index="2"]
+appearance = "rse_blackbelt"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/VisitorBlackBelt"]
+script = ExtResource("wg_talk")
+text = "Même au dojo, on s'est arrêtés pour écouter."
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/VisitorBlackBelt"]
+script = ExtResource("wg_show_if")
+condition = "bell_hung, !vigil_over"
+
+[node name="RolandAfter" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(488, 360)
+facing = Vector2i(-1, 0)
+
+[node name="Sprite" parent="Twins/Characters/RolandAfter" index="2"]
+appearance = "frlg_ruinmaniac"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/RolandAfter"]
+script = ExtResource("wg_talk")
+text = "Vingt ans que je passais au-dessus sans la voir."
+states = Array[String](["vigil_over => Je reste encore un peu.[page]Vingt ans à passer au-dessus : je peux bien la regarder une heure."])
+speaker = "Roland"
+speaker_color = Color(0.188235, 0.313725, 0.784314, 1)
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/RolandAfter"]
+script = ExtResource("wg_show_if")
+condition = "bell_hung"
+
+[node name="VisitorPainter" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(520, 344)
+facing = Vector2i(-1, 0)
+
+[node name="Sprite" parent="Twins/Characters/VisitorPainter" index="2"]
+appearance = "frlg_painter"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/VisitorPainter"]
+script = ExtResource("wg_talk")
+text = "Ne bouge pas... La lumière sur ce bronze est parfaite."
+states = Array[String](["vigil_over => Presque fini. Il me manque le reflet sur le bronze.[page]Les autres sont repartis. Moi, je reste jusqu'au dernier coup de pinceau."])
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/VisitorPainter"]
+script = ExtResource("wg_show_if")
+condition = "bell_hung"
+
+[node name="RunnerAfter" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(376, 312)
+pace = 3
+
+[node name="Sprite" parent="Twins/Characters/RunnerAfter" index="2"]
+appearance = "rse_triathlete_m"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/RunnerAfter"]
+script = ExtResource("wg_talk")
+text = "Cette cloche m'a ouvert les yeux ![page]J'ai couru dans le mauvais sens pendant dix ans !"
+states = Array[String](["vigil_over => Je cours dans le bon sens, maintenant. Enfin, je crois.[page]À chaque tour, je salue la cloche."])
+
+[node name="Patrol" type="Node" parent="Twins/Characters/RunnerAfter"]
+script = ExtResource("wg_patrol")
+route = Array[Vector2i]([Vector2i(23, 19), Vector2i(23, 26), Vector2i(33, 26), Vector2i(33, 19)])
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/RunnerAfter"]
+script = ExtResource("wg_show_if")
+condition = "bell_hung"
+
+[node name="FisherLater" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(536, 776)
+
+[node name="Sprite" parent="Twins/Characters/FisherLater" index="2"]
+appearance = "hgss_fisherman"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/FisherLater"]
+script = ExtResource("wg_talk")
+text = "Chut... Ça ne mord pas plus qu'avant.[page]Mais d'ici, maintenant, j'entends la cloche. Les poissons aussi, peut-être."
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/FisherLater"]
+script = ExtResource("wg_show_if")
+condition = "vigil_over"
+
+[node name="WorkerLater" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(24, 152)
+facing = Vector2i(1, 0)
+
+[node name="Sprite" parent="Twins/Characters/WorkerLater" index="2"]
+appearance = "dppt_worker"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/WorkerLater"]
+script = ExtResource("wg_talk")
+text = "La Route 1 est ouverte.[page]On surveille encore les éboulis, mais tu peux passer."
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/WorkerLater"]
+script = ExtResource("wg_show_if")
+condition = "vigil_over"
+
+[node name="WorkerLater2" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(472, 664)
+
+[node name="Sprite" parent="Twins/Characters/WorkerLater2" index="2"]
+appearance = "dppt_worker"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/WorkerLater2"]
+script = ExtResource("wg_talk")
+text = "On range le matériel du chantier.[page]Si tu pars vers le nord, bonne route !"
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/WorkerLater2"]
+script = ExtResource("wg_show_if")
+condition = "vigil_over"
+
+[node name="Corphish" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(488, 200)
+
+[node name="Sprite" parent="Twins/Characters/Corphish" index="2"]
+appearance = "pkmn_corphish"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/Corphish"]
+script = ExtResource("wg_talk")
+text = "[cry=corphish]Krr... Krapince !"
+speaker = "Écrapince"
+
+[node name="Shellder" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(776, 408)
+
+[node name="Sprite" parent="Twins/Characters/Shellder" index="2"]
+appearance = "pkmn_shellder"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/Shellder"]
+script = ExtResource("wg_talk")
+text = "[cry=shellder]Koki... yas !"
+speaker = "Kokiyas"
+
+[node name="Bellossom" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(792, 536)
+facing = Vector2i(-1, 0)
+
+[node name="Sprite" parent="Twins/Characters/Bellossom" index="2"]
+appearance = "pkmn_bellossom"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/Bellossom"]
+script = ExtResource("wg_talk")
+text = "[cry=bellossom]Joli ! Joliflor !"
+speaker = "Joliflor"
+
+[node name="KidRunnerA" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(424, 616)
+facing = Vector2i(1, 0)
+pace = 3
+
+[node name="Sprite" parent="Twins/Characters/KidRunnerA" index="2"]
+appearance = "hgss_tuber_m"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/KidRunnerA"]
+script = ExtResource("wg_talk")
+text = "Le premier au bout de la plage a gagné ![page]Pousse-toi, pousse-toi !"
+
+[node name="Patrol" type="Node" parent="Twins/Characters/KidRunnerA"]
+script = ExtResource("wg_patrol")
+route = Array[Vector2i]([Vector2i(26, 38), Vector2i(32, 38)])
+
+[node name="KidRunnerB" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(424, 632)
+facing = Vector2i(1, 0)
+pace = 3
+
+[node name="Sprite" parent="Twins/Characters/KidRunnerB" index="2"]
+appearance = "hgss_tuber_f"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/KidRunnerB"]
+script = ExtResource("wg_talk")
+text = "Attends-moi ! Tu es parti avant le signal !"
+
+[node name="Patrol" type="Node" parent="Twins/Characters/KidRunnerB"]
+script = ExtResource("wg_patrol")
+route = Array[Vector2i]([Vector2i(26, 39), Vector2i(32, 39)])
+
+[node name="NorthRoadblock0" type="Node2D" parent="Twins"]
+position = Vector2(72, 56)
+script = ExtResource("wg_roadblock")
+guard = NodePath("../../World/Entities/GuardWest")
+
+[node name="ShowIf" type="Node" parent="Twins/NorthRoadblock0"]
+script = ExtResource("wg_show_if")
+condition = "!bell_hung"

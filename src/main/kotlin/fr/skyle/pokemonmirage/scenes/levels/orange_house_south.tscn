@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="TileSet" path="res://src/main/kotlin/fr/skyle/pokemonmirage/resources/tilesets/level.tres" id="1_tileset"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/scene_trigger.tscn" id="2_door"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://addons/wildgrass/maps/spawn_point.gd" id="wg_spawn"]
 [ext_resource type="Script" path="res://game/readable.gd" id="mg_readable"]
 [ext_resource type="Script" path="res://addons/wildgrass/story/show_if.gd" id="wg_show_if"]
+[ext_resource type="PackedScene" path="res://game/npc.tscn" id="mg_npc"]
+[ext_resource type="Script" path="res://addons/wildgrass/dialogue/talk.gd" id="wg_talk"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("wg_map")
@@ -135,3 +137,20 @@ position = Vector2(344, 120)
 script = ExtResource("mg_readable")
 blocks = true
 text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Characters" type="Node2D" parent="Twins"]
+process_mode = 4
+visible = false
+
+[node name="Solange" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(184, 136)
+
+[node name="Sprite" parent="Twins/Characters/Solange" index="2"]
+appearance = "rse_npc_hoenn_mom"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/Solange"]
+script = ExtResource("wg_talk")
+text = "Entre, entre ! Ne fais pas attention au désordre.[page]Ma sœur jardine du matin au soir. La maison, c'est moi."
+states = Array[String](["bell_hung => Depuis la Veillée, ma sœur fredonne en jardinant.[page]C'est nouveau. Et c'est faux."])
+speaker = "Solange"
+speaker_color = Color(0.878431, 0.188235, 0.156863, 1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="TileSet" path="res://src/main/kotlin/fr/skyle/pokemonmirage/resources/tilesets/level.tres" id="1_tileset"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/scene_trigger.tscn" id="2_door"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://addons/wildgrass/maps/spawn_point.gd" id="wg_spawn"]
 [ext_resource type="Script" path="res://game/readable.gd" id="mg_readable"]
 [ext_resource type="Script" path="res://addons/wildgrass/story/show_if.gd" id="wg_show_if"]
+[ext_resource type="PackedScene" path="res://game/npc.tscn" id="mg_npc"]
+[ext_resource type="Script" path="res://addons/wildgrass/dialogue/talk.gd" id="wg_talk"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("wg_map")
@@ -145,3 +147,21 @@ position = Vector2(328, 136)
 script = ExtResource("mg_readable")
 blocks = true
 text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Characters" type="Node2D" parent="Twins"]
+process_mode = 4
+visible = false
+
+[node name="Anselme" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(264, 136)
+facing = Vector2i(0, -1)
+
+[node name="Sprite" parent="Twins/Characters/Anselme" index="2"]
+appearance = "hgss_gentleman"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/Anselme"]
+script = ExtResource("wg_talk")
+text = "Ma femme passe ses matinées sur le banc, dehors.[page]Moi, je garde la maison. Chacun son poste."
+states = Array[String](["bell_hung => Tu l'as entendue sonner ? Les vitres en tremblaient.[page]Ça faisait bien longtemps."])
+speaker = "Anselme"
+speaker_color = Color(0.188235, 0.313725, 0.784314, 1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="TileSet" path="res://src/main/kotlin/fr/skyle/pokemonmirage/resources/tilesets/level.tres" id="1_tileset"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/scene_trigger.tscn" id="2_door"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://addons/wildgrass/maps/spawn_point.gd" id="wg_spawn"]
 [ext_resource type="Script" path="res://game/readable.gd" id="mg_readable"]
 [ext_resource type="Script" path="res://addons/wildgrass/story/show_if.gd" id="wg_show_if"]
+[ext_resource type="PackedScene" path="res://game/npc.tscn" id="mg_npc"]
+[ext_resource type="Script" path="res://addons/wildgrass/dialogue/talk.gd" id="wg_talk"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("wg_map")
@@ -162,3 +164,43 @@ position = Vector2(296, 136)
 script = ExtResource("mg_readable")
 blocks = true
 kind = "tv"
+
+[node name="Characters" type="Node2D" parent="Twins"]
+process_mode = 4
+visible = false
+
+[node name="Odile" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(280, 184)
+facing = Vector2i(-1, 0)
+
+[node name="Sprite" parent="Twins/Characters/Odile" index="2"]
+appearance = "dppt_socialite"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/Odile"]
+script = ExtResource("wg_talk")
+text = "Te voilà debout. J'ai gardé du pain pour toi.[page]Tu as vu le socle vide, sur la place ? Il y avait une cloche dessus.[page]On la sonnait le dernier soir de l'été. Tout le village venait.[page]Même les Pokémon descendaient écouter, disait ma mère.[page]Personne ne sait où elle est passée.[page][flag=bell_told]Peut-être qu'Alix, la bibliothécaire, sait quelque chose."
+states = Array[String](["bell_told => Alors ? Alix t'a trouvé quelque chose ?[page]Prends ton temps. Moi, je ne bouge plus d'ici.", "bell_clean => Oh...[page]Elle est comme dans mon souvenir. Exactement comme ça.[page]Non, garde-la. Mes jambes ne montent plus jusque là-haut.[page]Tiens, prends aussi ça. Je l'ai porté à la dernière Veillée.[page][flag=bell_ribbon][give=vigil_ribbon]Vous recevez le Ruban de la Veillée ![page]Allez, va. Et sonne fort, que je l'entende d'ici.", "bell_ribbon => Allez, va. Et sonne fort, que je l'entende d'ici."])
+ask = "bell_clean => Montrer la cloche à Mémé ?"
+speaker = "Mémé Odile"
+speaker_color = Color(0.878431, 0.188235, 0.156863, 1)
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/Odile"]
+script = ExtResource("wg_show_if")
+condition = "!bell_hung"
+
+[node name="OdileBack" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(280, 184)
+facing = Vector2i(-1, 0)
+
+[node name="Sprite" parent="Twins/Characters/OdileBack" index="2"]
+appearance = "dppt_socialite"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/OdileBack"]
+script = ExtResource("wg_talk")
+text = "Mon dos va mieux, merci.[page]Quand la cloche sonne, je l'entends d'ici. Ça me suffit."
+speaker = "Mémé Odile"
+speaker_color = Color(0.878431, 0.188235, 0.156863, 1)
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/OdileBack"]
+script = ExtResource("wg_show_if")
+condition = "vigil_over"

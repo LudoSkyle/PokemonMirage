@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="TileSet" path="res://src/main/kotlin/fr/skyle/pokemonmirage/resources/tilesets/level.tres" id="1_tileset"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/scene_trigger.tscn" id="2_door"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://addons/wildgrass/maps/spawn_point.gd" id="wg_spawn"]
 [ext_resource type="Script" path="res://game/readable.gd" id="mg_readable"]
 [ext_resource type="Script" path="res://addons/wildgrass/story/show_if.gd" id="wg_show_if"]
+[ext_resource type="PackedScene" path="res://game/npc.tscn" id="mg_npc"]
+[ext_resource type="Script" path="res://addons/wildgrass/dialogue/talk.gd" id="wg_talk"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("wg_map")
@@ -302,3 +304,20 @@ blocks = true
 text = "Une machine de soin.[page]Elle n'a personne à soigner."
 states = Array[String](["bell_tarnished => [take=tarnished_bell][sound=healed]La machine s'allume et chante trois notes.[page][flag=bell_clean][give=clear_bell]Vous récupérez la Cloche claire !", "bell_clean => Une machine de soin.[page]Elle n'a personne à soigner."])
 ask = "bell_tarnished => Poser la Cloche ternie dans la machine ?"
+
+[node name="Characters" type="Node2D" parent="Twins"]
+process_mode = 4
+visible = false
+
+[node name="Professor" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(200, 168)
+
+[node name="Sprite" parent="Twins/Characters/Professor" index="2"]
+appearance = "custom_npc_prof_elm"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/Professor"]
+script = ExtResource("wg_talk")
+text = "Ah, bonjour ! Ne fais pas attention au désordre.[page]Je range ce laboratoire depuis des années."
+states = Array[String](["bell_tarnished => Fais voir ça... Du bronze de l'ancienne mine.[page]On n'en coule plus depuis bien avant moi.[page]Pose-la dans la machine de soin, là-bas. Elle nettoie tout.", "bell_clean => Regarde-moi ce bronze. Elle est comme neuve.[page]Je me demande quel son elle a.", "bell_hung => Je l'ai entendue d'ici, par la fenêtre ouverte.[page]Un son clair. Ma machine n'avait jamais aussi bien servi."])
+speaker = "Professeur"
+speaker_color = Color(0.188235, 0.313725, 0.784314, 1)

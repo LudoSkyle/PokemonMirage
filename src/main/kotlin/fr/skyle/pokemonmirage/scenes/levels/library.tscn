@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="TileSet" path="res://src/main/kotlin/fr/skyle/pokemonmirage/resources/tilesets/level.tres" id="1_tileset"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/scene_trigger.tscn" id="2_door"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://addons/wildgrass/maps/spawn_point.gd" id="wg_spawn"]
 [ext_resource type="Script" path="res://game/readable.gd" id="mg_readable"]
 [ext_resource type="Script" path="res://addons/wildgrass/story/show_if.gd" id="wg_show_if"]
+[ext_resource type="PackedScene" path="res://game/npc.tscn" id="mg_npc"]
+[ext_resource type="Script" path="res://addons/wildgrass/dialogue/talk.gd" id="wg_talk"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("wg_map")
@@ -463,3 +465,40 @@ position = Vector2(360, 136)
 script = ExtResource("mg_readable")
 blocks = true
 text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Characters" type="Node2D" parent="Twins"]
+process_mode = 4
+visible = false
+
+[node name="Alix" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(328, 184)
+
+[node name="Sprite" parent="Twins/Characters/Alix" index="2"]
+appearance = "frlg_aromalady"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/Alix"]
+script = ExtResource("wg_talk")
+text = "Bienvenue à la bibliothèque.[page]Tout ce qui est écrit sur le village est ici."
+states = Array[String](["bell_told => La cloche ? Ta grand-mère en parle encore ?[page]Le registre des Veillées doit être quelque part dans ces rayons.[page]Cherche au fond, à gauche : c'est là que dorment les vieux papiers.[page]Si tu le trouves, il est à toi. Moi, je ne grimpe plus à l'échelle.", "bell_register => Tu l'as trouvé ! Je le cherchais depuis des années."])
+speaker = "Alix"
+speaker_color = Color(0.878431, 0.188235, 0.156863, 1)
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/Alix"]
+script = ExtResource("wg_show_if")
+condition = "!bell_hung"
+
+[node name="AlixBack" parent="Twins/Characters" instance=ExtResource("mg_npc")]
+position = Vector2(328, 184)
+
+[node name="Sprite" parent="Twins/Characters/AlixBack" index="2"]
+appearance = "frlg_aromalady"
+
+[node name="Talk" type="Node2D" parent="Twins/Characters/AlixBack"]
+script = ExtResource("wg_talk")
+text = "La bibliothèque a rouvert.[page]Le Registre a une page de plus : celle de ce soir.[page]Garde-le sur toi. Il a assez dormi au fond de mes rayons."
+speaker = "Alix"
+speaker_color = Color(0.878431, 0.188235, 0.156863, 1)
+
+[node name="ShowIf" type="Node" parent="Twins/Characters/AlixBack"]
+script = ExtResource("wg_show_if")
+condition = "vigil_over"
