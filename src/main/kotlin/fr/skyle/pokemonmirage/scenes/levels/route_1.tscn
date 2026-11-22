@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4]
+[gd_scene load_steps=14 format=4]
 
 [ext_resource type="TileSet" uid="uid://c38ht37ho6e3a" path="res://src/main/kotlin/fr/skyle/pokemonmirage/resources/tilesets/level.tres" id="1_ian7c"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/scene_trigger.tscn" id="2_door"]
@@ -10,6 +10,9 @@
 [ext_resource type="Script" path="res://addons/wildgrass/maps/door.gd" id="wg_door"]
 [ext_resource type="Script" path="res://addons/wildgrass/maps/spawn_point.gd" id="wg_spawn"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/flyer.tscn" id="13_flyer"]
+[ext_resource type="Script" path="res://game/readable.gd" id="mg_readable"]
+[ext_resource type="Script" path="res://addons/wildgrass/story/show_if.gd" id="wg_show_if"]
+[ext_resource type="Script" path="res://addons/wildgrass/dialogue/sign.gd" id="wg_sign"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("wg_map")
@@ -344,3 +347,97 @@ transition = &"fade"
 [node name="Spawn" type="Marker2D" parent="."]
 position = Vector2(728, 776)
 script = ExtResource("wg_spawn")
+
+[node name="Twins" type="Node2D" parent="."]
+
+[node name="SignSouth" type="Node2D" parent="Twins"]
+position = Vector2(760, 744)
+script = ExtResource("wg_sign")
+blocks = true
+text = "Route 1.[page]Au sud : Bourg-Ludo."
+
+[node name="SignEast" type="Node2D" parent="Twins"]
+position = Vector2(1016, 568)
+script = ExtResource("wg_sign")
+blocks = true
+text = "Route de l'est.[page]Le chemin n'est pas encore tracé."
+
+[node name="SignNorth" type="Node2D" parent="Twins"]
+position = Vector2(200, 72)
+script = ExtResource("wg_sign")
+blocks = true
+text = "Route 1.[page]La montagne est droit devant."
+
+[node name="ItemRoutePotion" type="Node2D" parent="Twins"]
+position = Vector2(328, 184)
+script = ExtResource("mg_readable")
+blocks = true
+text = "[give=potion]Vous trouvez une Potion ![page]Vous rangez la Potion dans la poche Objets."
+kind = "item"
+flag = "found_route_potion"
+
+[node name="ItemRouteAntidote" type="Node2D" parent="Twins"]
+position = Vector2(936, 728)
+script = ExtResource("mg_readable")
+blocks = true
+text = "[give=antidote]Vous trouvez un Antidote ![page]Vous rangez l'Antidote dans la poche Objets."
+kind = "item"
+flag = "found_route_antidote"
+
+[node name="ItemRouteBall" type="Node2D" parent="Twins"]
+position = Vector2(104, 136)
+script = ExtResource("mg_readable")
+blocks = true
+text = "[give=poke_ball]Vous trouvez une Poké Ball ![page]Vous rangez la Poké Ball dans la poche Poké Balls."
+kind = "item"
+flag = "found_route_ball"
+
+[node name="ItemRouteSuper" type="Node2D" parent="Twins"]
+position = Vector2(984, 408)
+script = ExtResource("mg_readable")
+blocks = true
+text = "[give=super_potion]Vous trouvez une Super Potion ![page]Vous rangez la Super Potion dans la poche Objets."
+kind = "item"
+flag = "found_route_super"
+
+[node name="CutTree0" type="Node2D" parent="Twins"]
+position = Vector2(984, 664)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Cet arbre semble pouvoir être coupé !"
+
+[node name="RoadEndNorth0" type="Node2D" parent="Twins"]
+position = Vector2(232, 8)
+script = ExtResource("mg_readable")
+blocks = true
+text = "La route continue vers la montagne.[page]Le chemin n'est pas encore tracé au-delà."
+
+[node name="RoadEndNorth1" type="Node2D" parent="Twins"]
+position = Vector2(248, 8)
+script = ExtResource("mg_readable")
+blocks = true
+text = "La route continue vers la montagne.[page]Le chemin n'est pas encore tracé au-delà."
+
+[node name="RoadEndNorth2" type="Node2D" parent="Twins"]
+position = Vector2(264, 8)
+script = ExtResource("mg_readable")
+blocks = true
+text = "La route continue vers la montagne.[page]Le chemin n'est pas encore tracé au-delà."
+
+[node name="RoadEndEast0" type="Node2D" parent="Twins"]
+position = Vector2(1096, 568)
+script = ExtResource("mg_readable")
+blocks = true
+text = "La route continue vers l'est.[page]Le chemin n'est pas encore tracé au-delà."
+
+[node name="RoadEndEast1" type="Node2D" parent="Twins"]
+position = Vector2(1096, 584)
+script = ExtResource("mg_readable")
+blocks = true
+text = "La route continue vers l'est.[page]Le chemin n'est pas encore tracé au-delà."
+
+[node name="RoadEndEast2" type="Node2D" parent="Twins"]
+position = Vector2(1096, 600)
+script = ExtResource("mg_readable")
+blocks = true
+text = "La route continue vers l'est.[page]Le chemin n'est pas encore tracé au-delà."

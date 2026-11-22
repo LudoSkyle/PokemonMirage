@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="TileSet" path="res://src/main/kotlin/fr/skyle/pokemonmirage/resources/tilesets/level.tres" id="1_tileset"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/scene_trigger.tscn" id="2_door"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://addons/wildgrass/maps/map.gd" id="wg_map"]
 [ext_resource type="Script" path="res://addons/wildgrass/maps/door.gd" id="wg_door"]
 [ext_resource type="Script" path="res://addons/wildgrass/maps/spawn_point.gd" id="wg_spawn"]
+[ext_resource type="Script" path="res://game/readable.gd" id="mg_readable"]
+[ext_resource type="Script" path="res://addons/wildgrass/story/show_if.gd" id="wg_show_if"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("wg_map")
@@ -243,3 +245,221 @@ target_door = &"Bibliotheque"
 kind = 1
 direction = Vector2i(0, 1)
 transition = &"fade"
+
+[node name="Twins" type="Node2D" parent="."]
+
+[node name="Archives70" type="Node2D" parent="Twins"]
+position = Vector2(152, 120)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+states = Array[String](["bell_told => Des registres reliés, rangés par année."])
+
+[node name="Archives71" type="Node2D" parent="Twins"]
+position = Vector2(168, 120)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+states = Array[String](["bell_told => Des registres reliés, rangés par année."])
+
+[node name="Archives72" type="Node2D" parent="Twins"]
+position = Vector2(184, 120)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+states = Array[String](["bell_told => Des registres reliés, rangés par année."])
+
+[node name="Archives73" type="Node2D" parent="Twins"]
+position = Vector2(200, 120)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+states = Array[String](["bell_told => Des registres reliés, rangés par année."])
+
+[node name="Archives80" type="Node2D" parent="Twins"]
+position = Vector2(152, 136)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+states = Array[String](["bell_told => Des registres reliés, rangés par année."])
+
+[node name="Archives81" type="Node2D" parent="Twins"]
+position = Vector2(168, 136)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+states = Array[String](["bell_told => Des registres reliés, rangés par année."])
+
+[node name="ArchivesClosed" type="Node2D" parent="Twins"]
+position = Vector2(184, 136)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="ShowIf" type="Node" parent="Twins/ArchivesClosed"]
+script = ExtResource("wg_show_if")
+condition = "!bell_told"
+
+[node name="Register" type="Node2D" parent="Twins"]
+position = Vector2(184, 136)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Des registres reliés, rangés par année.[page]L'un d'eux est beaucoup plus poussiéreux que les autres.[page][give=dusty_register]Vous trouvez le Registre poussiéreux ![page]« ...la cloche a été descendue à l'abri pour l'hiver, »[page]« au frais, là où l'eau dort sous les planches. »[page]« On la remontera pour la Veillée prochaine. »"
+states = Array[String](["bell_register => C'est de là que venait le registre.[page]Le vide dans la rangée se voit encore."])
+kind = "item"
+flag = "bell_register"
+
+[node name="ShowIf" type="Node" parent="Twins/Register"]
+script = ExtResource("wg_show_if")
+condition = "bell_told"
+
+[node name="Archives83" type="Node2D" parent="Twins"]
+position = Vector2(200, 136)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+states = Array[String](["bell_told => Des registres reliés, rangés par année."])
+
+[node name="Books01" type="Node2D" parent="Twins"]
+position = Vector2(168, 184)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books03" type="Node2D" parent="Twins"]
+position = Vector2(184, 184)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books05" type="Node2D" parent="Twins"]
+position = Vector2(200, 184)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books06" type="Node2D" parent="Twins"]
+position = Vector2(216, 120)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books07" type="Node2D" parent="Twins"]
+position = Vector2(216, 136)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books09" type="Node2D" parent="Twins"]
+position = Vector2(216, 184)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books10" type="Node2D" parent="Twins"]
+position = Vector2(232, 120)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books11" type="Node2D" parent="Twins"]
+position = Vector2(232, 136)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books13" type="Node2D" parent="Twins"]
+position = Vector2(264, 184)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books14" type="Node2D" parent="Twins"]
+position = Vector2(280, 120)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books15" type="Node2D" parent="Twins"]
+position = Vector2(280, 136)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books17" type="Node2D" parent="Twins"]
+position = Vector2(280, 184)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books18" type="Node2D" parent="Twins"]
+position = Vector2(296, 120)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books19" type="Node2D" parent="Twins"]
+position = Vector2(296, 136)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books21" type="Node2D" parent="Twins"]
+position = Vector2(296, 184)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books22" type="Node2D" parent="Twins"]
+position = Vector2(312, 120)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books23" type="Node2D" parent="Twins"]
+position = Vector2(312, 136)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books25" type="Node2D" parent="Twins"]
+position = Vector2(312, 184)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books26" type="Node2D" parent="Twins"]
+position = Vector2(328, 120)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books27" type="Node2D" parent="Twins"]
+position = Vector2(328, 136)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books28" type="Node2D" parent="Twins"]
+position = Vector2(344, 120)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books29" type="Node2D" parent="Twins"]
+position = Vector2(344, 136)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books30" type="Node2D" parent="Twins"]
+position = Vector2(360, 120)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"
+
+[node name="Books31" type="Node2D" parent="Twins"]
+position = Vector2(360, 136)
+script = ExtResource("mg_readable")
+blocks = true
+text = "Une bibliothèque pleine de livres.[page]Ils ont l'air très intéressants !"

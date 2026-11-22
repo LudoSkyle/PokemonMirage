@@ -11,7 +11,8 @@ SAME = re.compile(r"^(x[0-9.]+|Français|English|Options|Debug|[0-9:]+|)$")
 
 
 def boxes(text):
-    return [part.strip() for part in text.split("|") if part.strip()]
+    # Une boite du jeu Kotlin finit au "|", une page du moteur Wildgrass a "[page]".
+    return [part.strip() for part in re.split(r"\||\[page\]", text) if part.strip()]
 
 
 def sources():
@@ -22,6 +23,8 @@ def sources():
             # "@give:objet ", "@take:objet ", "@flag:drapeau ", "@sound:jingle "
             # ou "@reload " en tete d'une boite sont des consignes, pas du texte.
             box = re.sub(r"^(@(give|take|flag|sound|cry):\w+(\*\d+)? |@reload )+", "", box)
+            # Les balises du moteur aussi : "[give=objet]", "[flag=drapeau]", "[reload]"...
+            box = re.sub(r"^(\[(give|take|flag|unflag|sound|cry|jingle)=[^\]]*\]|\[reload\])+", "", box)
             if not SAME.match(box):
                 found.setdefault(box, where)
 
@@ -30,12 +33,12 @@ def sources():
         for text in re.findall(r'^text = "((?:[^"\\]|\\.)*)"$', body, re.M):
             add(text.replace('\\"', '"').replace("\\n", "\n"), path)
         # Textes selon l'histoire : "drapeau > texte", le drapeau n'est pas du texte.
-        for states in re.findall(r"^states = PackedStringArray\((.*)\)$", body, re.M):
+        for states in re.findall(r"^states = (?:PackedStringArray|Array\[String\])\(\[?(.*?)\]?\)$", body, re.M):
             for text in re.findall(r'"((?:[^"\\]|\\.)*)"', states):
-                add(re.sub(r"^\s*\w+\s*>", "", text).replace('\\"', '"').replace("\\n", "\n"), path)
+                add(re.sub(r"^\s*[\w!, ]+\s*=?>", "", text).replace('\\"', '"').replace("\\n", "\n"), path)
         # Question avant d'agir : "Question ?" ou "drapeau > Question ?".
         for text in re.findall(r'^ask = "((?:[^"\\]|\\.)*)"$', body, re.M):
-            add(re.sub(r"^\s*\w+\s*>", "", text).replace('\\"', '"'), path)
+            add(re.sub(r"^\s*[\w!, ]+\s*=?>", "", text).replace('\\"', '"'), path)
         for text in re.findall(r'^metadata/location = "(.*)"$', body, re.M):
             add(text, path)
         # Le nom d'un personnage, affiche au-dessus de la boite de dialogue.
@@ -48,6 +51,14 @@ def sources():
             add(text.replace("\\n", "\n"), path)
         # Listes de textes dits tels quels par la boite de dialogue.
         for block in re.findall(r"// i18n\n(.*?)\n\t\t\)", body, re.S):
+            for text in re.findall(r'"((?:[^"\\]|\\.)*)"', block):
+                add(text, path)
+    # Le jeu sur le moteur Wildgrass, en GDScript : tr("...") et les listes "# i18n".
+    for path in sorted(glob.glob("game/**/*.gd", recursive=True)):
+        body = open(path, encoding="utf-8").read()
+        for text in re.findall(r'\btr\("((?:[^"\\]|\\.)*)"\)', body):
+            add(text.replace("\\n", "\n"), path)
+        for block in re.findall(r"# i18n\n.*?\[\n(.*?)\n\]", body, re.S):
             for text in re.findall(r'"((?:[^"\\]|\\.)*)"', block):
                 add(text, path)
     return found

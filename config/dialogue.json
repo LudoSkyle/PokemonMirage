@@ -1,0 +1,1 @@
+{ "actions": { "confirm": "interact", "cancel": "menu", "up": "ui_up", "down": "ui_down", "left": "ui_left", "right": "ui_right" } }

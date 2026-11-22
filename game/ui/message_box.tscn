@@ -1,0 +1,123 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="PackedScene" path="res://addons/wildgrass/dialogue/message_box.tscn" id="1_box"]
+[ext_resource type="Script" path="res://game/ui/fine_frame.gd" id="2_frame"]
+[ext_resource type="Texture2D" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/ui/message_box.png" id="3_art"]
+[ext_resource type="FontFile" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/fonts/pokemon-dp-pro.ttf" id="4_font"]
+[ext_resource type="Texture2D" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/ui/frames/rse_01.png" id="5_choice_frame"]
+[ext_resource type="Texture2D" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/ui/cursor.png" id="6_cursor"]
+[ext_resource type="Script" path="res://game/ui/pixel_shadow.gd" id="7_shadow"]
+
+[sub_resource type="FontVariation" id="dialogue_font"]
+base_font = ExtResource("4_font")
+spacing_top = -1
+spacing_bottom = -1
+
+[sub_resource type="StyleBoxEmpty" id="empty"]
+
+[sub_resource type="StyleBoxTexture" id="choice_frame"]
+texture = ExtResource("5_choice_frame")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 6.0
+
+[node name="MessageBox" instance=ExtResource("1_box")]
+waiting = NodePath("")
+portrait = NodePath("")
+choices = NodePath("ChoiceFrame")
+choice_cursor = NodePath("Cursor")
+
+[node name="Frame" parent="." index="0"]
+offset_top = -46.0
+theme_override_styles/panel = SubResource("empty")
+
+[node name="Art" type="Control" parent="Frame" index="0"]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("2_frame")
+texture = ExtResource("3_art")
+
+[node name="Margin" parent="Frame" index="1"]
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 7
+theme_override_constants/margin_bottom = 5
+
+[node name="Text" parent="Frame/Margin" index="0"]
+theme_override_colors/default_color = Color(0.345098, 0.345098, 0.313725, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/normal_font = SubResource("dialogue_font")
+theme_override_font_sizes/normal_font_size = 16
+
+[node name="Shadow" type="Node" parent="Frame/Margin/Text" index="0"]
+script = ExtResource("7_shadow")
+
+[node name="Speaker" parent="." index="1"]
+theme_override_styles/panel = SubResource("empty")
+
+[node name="Art" type="Control" parent="Speaker" index="0"]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("2_frame")
+texture = ExtResource("3_art")
+
+[node name="Name" parent="Speaker" index="1"]
+custom_minimum_size = Vector2(0, 20)
+theme_override_colors/font_color = Color(0.345098, 0.345098, 0.313725, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = SubResource("dialogue_font")
+theme_override_font_sizes/font_size = 16
+text = " "
+vertical_alignment = 1
+
+[node name="Shadow" type="Node" parent="Speaker/Name" index="0"]
+script = ExtResource("7_shadow")
+
+[node name="ChoiceFrame" type="PanelContainer" parent="." index="5"]
+visible = false
+layout_mode = 0
+theme_override_styles/panel = SubResource("choice_frame")
+
+[node name="List" type="VBoxContainer" parent="ChoiceFrame"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Choice" type="Button" parent="ChoiceFrame/List"]
+layout_mode = 2
+focus_mode = 0
+auto_translate_mode = 2
+theme_override_colors/font_color = Color(0.345098, 0.345098, 0.313725, 1)
+theme_override_colors/font_pressed_color = Color(0.345098, 0.345098, 0.313725, 1)
+theme_override_colors/font_hover_color = Color(0.345098, 0.345098, 0.313725, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.345098, 0.345098, 0.313725, 1)
+theme_override_colors/font_focus_color = Color(0.345098, 0.345098, 0.313725, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = SubResource("dialogue_font")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("empty")
+theme_override_styles/pressed = SubResource("empty")
+theme_override_styles/hover = SubResource("empty")
+theme_override_styles/hover_pressed = SubResource("empty")
+theme_override_styles/focus = SubResource("empty")
+toggle_mode = true
+alignment = 0
+
+[node name="Cursor" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 6.0
+offset_bottom = 10.0
+mouse_filter = 2
+texture = ExtResource("6_cursor")
