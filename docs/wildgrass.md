@@ -70,6 +70,18 @@ le Kotlin garde son `SubViewport` ; il passera dans `config/display.json`.
    Kotlin qui en dépendent (le socle de la cloche, les archives), et quitter
    une carte par une porte applique son `on_leave` : la quête de la cloche se
    joue d'un bout à l'autre sur le moteur.
+   Puis les écrans, chacun la scène Kotlin ramenée à 320 × 240 (le même au
+   pixel près, sauf le liseré des lettres) sur l'écran du moteur qu'il
+   habille : le sac (`game/ui/bag_screen.tscn`), le menu de pause et les
+   options (dans les mots et l'ordre de Mirage, les options du moteur
+   remplacées sous les mêmes noms), la sauvegarde (trois emplacements, les
+   cartes trouvées par leur nom grâce à `wildgrass/paths/maps`), l'écran titre
+   et le choix d'une partie. `game/ui/choice_box.tscn` et `menu_keys.gd`
+   (la répétition des touches tenues) servent à tous. Les mots du moteur que
+   Mirage montre (Oui, Non) sont traduits dans `locale/fr.po`.
+   `game/main.tscn` ouvre le titre ; `title = false` le saute (les tests).
+   *Reste* : les sons des menus (étape 6), les outils Debug de Mirage
+   (étape 7).
 5. **Pokémon** : `Species`, `NationalDex`, `Pokedex`, `RegionalDex`,
    `PokedexMenu`, `WildEncounters` → le moteur, le pack de données lu par sa
    couche Studio.

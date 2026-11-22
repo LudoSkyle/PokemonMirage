@@ -32,6 +32,7 @@ func after_test() -> void:
 
 func _start() -> WgWalker:
 	_main = MAIN.instantiate()
+	_main.title = false
 	add_child(_main)
 	for frame in 600:
 		if Wildgrass.maps.current != null and not Wildgrass.maps.is_changing:

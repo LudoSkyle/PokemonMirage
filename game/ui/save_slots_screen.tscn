@@ -1,0 +1,150 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="PackedScene" path="res://game/ui/choice_box.tscn" id="10_choices"]
+[ext_resource type="Script" path="res://game/ui/save_slots_screen.gd" id="11_slots"]
+[ext_resource type="FontFile" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/fonts/pokemon-dp-pro.ttf" id="12_font"]
+[ext_resource type="Texture2D" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/ui/bag/arrow_left.png" id="13_left"]
+[ext_resource type="Texture2D" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/ui/bag/arrow_right.png" id="14_right"]
+
+[sub_resource type="FontVariation" id="menu_font"]
+base_font = ExtResource("12_font")
+spacing_top = -1
+spacing_bottom = -1
+
+[node name="SaveSlotsScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("11_slots")
+
+[node name="Wash" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 0
+offset_top = 0
+offset_right = 320
+offset_bottom = 240
+mouse_filter = 2
+color = Color(0.898039, 0.945098, 1, 0.5)
+
+[node name="Strip" type="Control" parent="."]
+layout_mode = 0
+offset_left = 0
+offset_top = 54
+offset_right = 320
+offset_bottom = 194
+mouse_filter = 2
+
+[node name="Header" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 176
+offset_top = 10
+offset_right = 320
+offset_bottom = 30
+mouse_filter = 2
+color = Color(0.14902, 0.203922, 0.431373, 1)
+
+[node name="Line" type="ColorRect" parent="Header"]
+layout_mode = 0
+offset_left = 0
+offset_top = 20
+offset_right = 144
+offset_bottom = 21
+mouse_filter = 2
+color = Color(1, 1, 1, 1)
+
+[node name="Title" type="Label" parent="Header"]
+layout_mode = 0
+offset_left = 0
+offset_top = 2
+offset_right = 144
+offset_bottom = 18
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.117647, 0.184314, 0.431373, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = SubResource("menu_font")
+theme_override_font_sizes/font_size = 16
+text = "PARTIES"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Footer" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 0
+offset_top = 218
+offset_right = 320
+offset_bottom = 240
+mouse_filter = 2
+color = Color(0.14902, 0.203922, 0.431373, 1)
+
+[node name="Line" type="ColorRect" parent="Footer"]
+layout_mode = 0
+offset_left = 0
+offset_top = -1
+offset_right = 320
+offset_bottom = 0
+mouse_filter = 2
+color = Color(1, 1, 1, 1)
+
+[node name="Hint" type="Label" parent="Footer"]
+layout_mode = 0
+offset_left = 8
+offset_top = 3
+offset_right = 208
+offset_bottom = 19
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.117647, 0.184314, 0.431373, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = SubResource("menu_font")
+theme_override_font_sizes/font_size = 16
+text = ""
+horizontal_alignment = 0
+vertical_alignment = 1
+
+[node name="Back" type="Label" parent="Footer"]
+layout_mode = 0
+offset_left = 212
+offset_top = 3
+offset_right = 312
+offset_bottom = 19
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.117647, 0.184314, 0.431373, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = SubResource("menu_font")
+theme_override_font_sizes/font_size = 16
+text = "X : Retour"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Left" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 6
+offset_top = 116
+offset_right = 22
+offset_bottom = 132
+mouse_filter = 2
+texture = ExtResource("13_left")
+expand_mode = 1
+
+[node name="Right" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 298
+offset_top = 116
+offset_right = 314
+offset_bottom = 132
+mouse_filter = 2
+texture = ExtResource("14_right")
+expand_mode = 1
+
+[node name="Choices" parent="." instance=ExtResource("10_choices")]
+layout_mode = 0
+offset_left = 192
+offset_top = 130
+offset_right = 304
+offset_bottom = 210
