@@ -589,7 +589,7 @@ def build(plan):
     REACH0 = reach_from(start) if free(start) else set()
 
     # ============================================================ 8. ce qu'on pose sur la carte : panneaux, lampadaires, objets, personnages
-    nodes, placed = {'World': [], 'Entities': [], 'Doors': [], 'Sky': []}, {}
+    nodes, placed = {'World': [], 'Entities': [], 'Doors': [], 'Exits': [], 'Sky': []}, {}
     NO_STAND = fronts | flower_cells | GARDEN | DECK | STEPS | GATES | around(GATES)
     def settle(name, wish, solid=True, apart=2, exact=False):
         """La case libre la plus proche de `wish` où poser quelque chose sans gêner : ni devant une porte ou un escalier, ni sur un ponton ou une piste, ni dans un passage étroit, ni derrière un arbre. `exact` : la case du plan, telle quelle."""
@@ -607,10 +607,14 @@ def build(plan):
                 return q
         warn.append('%s : aucune case convenable près de %s' % (name, wish)); placed[name] = wish; return wish
     def quote(text): return text.replace('\\', '\\\\').replace('"', '\\"')
+    def exit_twin(name, c, scene, door, direction):          # la porte du moteur Wildgrass, jumelle de la SceneTrigger (docs/wildgrass.md)
+        nodes['Exits'].append('[node name="%s" type="Area2D" parent="Exits"]\nposition = Vector2(%d, %d)\nscript = ExtResource("wg_door")\ntarget_map = &"%sscenes/levels/%s.tscn"\ntarget_door = &"%s"\nkind = 0\ndirection = Vector2i(%d, %d)\ntransition = &"fade"\n'
+                              % (name, *px(c), RES, scene, door, *direction))
     for name, (kind, x, r, h) in houses.items():
         if h.get('scene'):
             nodes['Doors'].append('[node name="%s" parent="Doors" instance=ExtResource("2_door")]\nposition = Vector2(%d, %d)\ntarget_scene = "%sscenes/levels/%s.tscn"\ntarget_door = "%s"\nentry_direction = Vector2(0, 1)\n'
                                   % (name, *px(doors[name]), RES, h['scene'], h.get('door', 'Entree')))
+            exit_twin(name, doors[name], h['scene'], h.get('door', 'Entree'), (0, 1))
         if doors[name] not in LAND or (doors[name][0], doors[name][1] + 1) not in REACH0: warn.append('maison %s : sa porte n est pas atteinte depuis le départ' % name)
     for e, gate in exits:
         inward = (0, 1) if gate and gate[0][1] == 0 else (0, -1) if gate and gate[0][1] == H - 1 else (1, 0) if gate and gate[0][0] == 0 else (-1, 0)
@@ -619,6 +623,7 @@ def build(plan):
             if e.get('scene'):
                 nodes['Doors'].append('[node name="%s%d" parent="Doors" instance=ExtResource("2_door")]\nposition = Vector2(%d, %d)\ntarget_scene = "%sscenes/levels/%s.tscn"\ntarget_door = "%s%d"\nentry_direction = Vector2(%d, %d)\n'
                                       % (e.get('name', 'Sortie'), i, *px(c), RES, e['scene'], e.get('door', 'Entree'), i, *inward))
+                exit_twin('%s%d' % (e.get('name', 'Sortie'), i), c, e['scene'], '%s%d' % (e.get('door', 'Entree'), i), inward)
     for s in plan.table('sign'):
         c = settle(s['name'], plan.at(s['mark'], 'panneau %s' % s['name']), exact=s.get('exact', False))
         if c in L['Decorations']: L['Decorations'][(c[0], c[1] - 1)] = L['Decorations'].pop(c)          # la fleur qui était là remonte d'une case
@@ -700,7 +705,9 @@ def scene(built):
     if plan.map.get('daylight', True): meta.append('metadata/daylight = true')
     if plan.map.get('shade'): meta.append('metadata/shade = Color(%g, %g, %g, 1)' % tuple(plan.map['shade']))          # la pénombre d'un sous-bois : elle multiplie la teinte de l'heure (docs/daynight.md)
     if plan.map.get('wild'): meta += ['metadata/encounter_rate = %d' % plan.map.get('encounter_rate', 3), 'metadata/encounter_rate_run = %d' % plan.map.get('encounter_rate_run', 5), 'metadata/wild = "%s"' % plan.map['wild']]
-    head = '''[gd_scene load_steps=8 format=4]
+    root = ['script = ExtResource("wg_map")', 'entities = NodePath("World/Entities")', 'size = Vector2i(%d, %d)' % (built['W'], built['H'])]
+    if plan.map.get('daylight', True): root.append('outside = true')
+    head = '''[gd_scene load_steps=11 format=4]
 
 [ext_resource type="TileSet" uid="uid://c38ht37ho6e3a" path="{R}resources/tilesets/level.tres" id="1_tiles"]
 [ext_resource type="PackedScene" path="{R}scenes/levels/scene_trigger.tscn" id="2_door"]
@@ -709,12 +716,15 @@ def scene(built):
 [ext_resource type="PackedScene" path="{R}scenes/levels/readable.tscn" id="9_readable"]
 [ext_resource type="PackedScene" path="{R}scenes/levels/street_lamp.tscn" id="10_lamp"]
 [ext_resource type="PackedScene" path="{R}scenes/levels/flyer.tscn" id="13_flyer"]
+[ext_resource type="Script" path="res://addons/wildgrass/maps/map.gd" id="wg_map"]
+[ext_resource type="Script" path="res://addons/wildgrass/maps/door.gd" id="wg_door"]
 {BALL}
 [node name="Level" type="Node2D"]
+{ROOT}
 {M}
 
 [node name="Background" type="Node2D" parent="."]
-'''.replace('{R}', RES).replace('{M}', '\n'.join(meta)).replace('{BALL}', '[ext_resource type="Texture2D" path="res://%s" id="12_ball"]\n' % THEME['sources']['item_ball']['sheet'] if THEME['sources'].get('item_ball') and built['plan'].table('item') else '')
+'''.replace('{R}', RES).replace('{ROOT}', '\n'.join(root)).replace('{M}', '\n'.join(meta)).replace('{BALL}', '[ext_resource type="Texture2D" path="res://%s" id="12_ball"]\n' % THEME['sources']['item_ball']['sheet'] if THEME['sources'].get('item_ball') and built['plan'].table('item') else '')
     parts = [head] + [layer(n, 'Background') for n in built['ORDER']]
     parts.append('[node name="World" type="Node2D" parent="."]\ny_sort_enabled = true\n')
     parts += [layer(n, 'World', True) for n in ('Trees', 'Props', 'Houses')] + built['nodes']['World']
@@ -722,6 +732,8 @@ def scene(built):
     parts += built['nodes']['Entities']
     parts.append('[node name="Doors" type="Node2D" parent="."]\n')
     parts += built['nodes']['Doors']
+    parts.append('[node name="Exits" type="Node2D" parent="."]\n')
+    parts += built['nodes']['Exits']
     parts.append('[node name="Sky" type="Node2D" parent="."]\nz_index = 40\n')
     parts += built['nodes']['Sky']
     return '\n'.join(parts)

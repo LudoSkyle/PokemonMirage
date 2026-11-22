@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4]
+[gd_scene load_steps=18 format=4]
 
 [ext_resource type="TileSet" uid="uid://c38ht37ho6e3a" path="res://src/main/kotlin/fr/skyle/pokemonmirage/resources/tilesets/level.tres" id="1_ian7c"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/scene_trigger.tscn" id="2_door"]
@@ -14,6 +14,9 @@
 [ext_resource type="Texture2D" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/levels/island.png" id="12_island"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/flyer.tscn" id="13_flyer"]
 [ext_resource type="Script" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scripts/gameplay/levels/Twinkle.kt" id="14_twinkle"]
+[ext_resource type="Script" path="res://addons/wildgrass/maps/map.gd" id="wg_map"]
+[ext_resource type="Script" path="res://addons/wildgrass/maps/door.gd" id="wg_door"]
+[ext_resource type="Script" path="res://addons/wildgrass/maps/spawn_point.gd" id="wg_spawn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_stand"]
 size = Vector2(48, 16)
@@ -22,6 +25,10 @@ size = Vector2(48, 16)
 size = Vector2(16, 16)
 
 [node name="Level" type="Node2D"]
+script = ExtResource("wg_map")
+entities = NodePath("World/Entities")
+size = Vector2i(55, 50)
+outside = true
 metadata/location = "Bourg-Ludo"
 metadata/banner = "wood"
 metadata/music = "new_bark_town"
@@ -737,3 +744,81 @@ required_flag = "bell_spotted"
 script = ExtResource("14_twinkle")
 color = Color(1, 1, 0.85, 0.9)
 polygon = PackedVector2Array(0, -3, 1, -1, 3, 0, 1, 1, 0, 3, -1, 1, -3, 0, -1, -1)
+
+[node name="Exits" type="Node2D" parent="."]
+
+[node name="MaisonLudo" type="Area2D" parent="Exits"]
+position = Vector2(168, 136)
+script = ExtResource("wg_door")
+target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/ludo_house.tscn"
+target_door = &"Entree"
+kind = 0
+direction = Vector2i(0, 1)
+transition = &"fade"
+
+[node name="Bibliotheque" type="Area2D" parent="Exits"]
+position = Vector2(56, 472)
+script = ExtResource("wg_door")
+target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/library.tscn"
+target_door = &"Entree"
+kind = 0
+direction = Vector2i(0, 1)
+transition = &"fade"
+
+[node name="Laboratoire" type="Area2D" parent="Exits"]
+position = Vector2(728, 136)
+script = ExtResource("wg_door")
+target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/lab_house.tscn"
+target_door = &"Entree"
+kind = 0
+direction = Vector2i(0, 1)
+transition = &"fade"
+
+[node name="MaisonNord" type="Area2D" parent="Exits"]
+position = Vector2(280, 152)
+script = ExtResource("wg_door")
+target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/orange_house_north.tscn"
+target_door = &"Entree"
+kind = 0
+direction = Vector2i(0, 1)
+transition = &"fade"
+
+[node name="MaisonSud" type="Area2D" parent="Exits"]
+position = Vector2(712, 536)
+script = ExtResource("wg_door")
+target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/orange_house_south.tscn"
+target_door = &"Entree"
+kind = 0
+direction = Vector2i(0, 1)
+transition = &"fade"
+
+[node name="Nord0" type="Area2D" parent="Exits"]
+position = Vector2(56, 8)
+script = ExtResource("wg_door")
+target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/route_1.tscn"
+target_door = &"Sud0"
+kind = 0
+direction = Vector2i(0, 1)
+transition = &"fade"
+
+[node name="Nord1" type="Area2D" parent="Exits"]
+position = Vector2(72, 8)
+script = ExtResource("wg_door")
+target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/route_1.tscn"
+target_door = &"Sud1"
+kind = 0
+direction = Vector2i(0, 1)
+transition = &"fade"
+
+[node name="Nord2" type="Area2D" parent="Exits"]
+position = Vector2(88, 8)
+script = ExtResource("wg_door")
+target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/route_1.tscn"
+target_door = &"Sud2"
+kind = 0
+direction = Vector2i(0, 1)
+transition = &"fade"
+
+[node name="Spawn" type="Marker2D" parent="."]
+position = Vector2(168, 152)
+script = ExtResource("wg_spawn")

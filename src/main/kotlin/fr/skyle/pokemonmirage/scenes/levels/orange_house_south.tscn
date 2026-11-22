@@ -1,11 +1,17 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="TileSet" path="res://src/main/kotlin/fr/skyle/pokemonmirage/resources/tilesets/level.tres" id="1_tileset"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/scene_trigger.tscn" id="2_door"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/readable.tscn" id="3_readable"]
 [ext_resource type="PackedScene" path="res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/characters/npc.tscn" id="4_npc"]
+[ext_resource type="Script" path="res://addons/wildgrass/maps/map.gd" id="wg_map"]
+[ext_resource type="Script" path="res://addons/wildgrass/maps/door.gd" id="wg_door"]
+[ext_resource type="Script" path="res://addons/wildgrass/maps/spawn_point.gd" id="wg_spawn"]
 
 [node name="Level" type="Node2D"]
+script = ExtResource("wg_map")
+entities = NodePath("World/Entities")
+size = Vector2i(32, 20)
 metadata/location = "Maison de Solange"
 metadata/banner = "wood"
 metadata/music = "new_bark_town"
@@ -81,3 +87,23 @@ text = "Une bibliothèque pleine de livres.|Ils ont l'air très intéressants !"
 [node name="Books1" parent="Readables" instance=ExtResource("3_readable")]
 position = Vector2(344, 120)
 text = "Une bibliothèque pleine de livres.|Ils ont l'air très intéressants !"
+
+[node name="Exits" type="Node2D" parent="."]
+
+[node name="Entree" type="Area2D" parent="Exits"]
+position = Vector2(248, 232)
+script = ExtResource("wg_door")
+target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/start_island.tscn"
+target_door = &"MaisonSud"
+kind = 1
+direction = Vector2i(0, 1)
+transition = &"fade"
+
+[node name="EntreeBis" type="Area2D" parent="Exits"]
+position = Vector2(264, 232)
+script = ExtResource("wg_door")
+target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/start_island.tscn"
+target_door = &"MaisonSud"
+kind = 1
+direction = Vector2i(0, 1)
+transition = &"fade"

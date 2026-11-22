@@ -11,8 +11,17 @@ de travail doit le recopier depuis une autre.
 
 ## La migration, dans l'ordre
 
-Chaque étape garde le jeu jouable et les tests verts ; le Kotlin qu'elle
-remplace part avec elle.
+Le jeu sur le moteur se construit **à côté** du jeu Kotlin : `game/main.tscn`
+le lance (`godot --path . res://game/main.tscn`), la scène principale du
+projet reste celle du Kotlin. Les cartes servent aux deux : leur racine est un
+`WgMap` et chaque `SceneTrigger` a sa jumelle `WgDoor` sous `Exits`. Quand le
+jeu sur le moteur fait tout ce que fait le Kotlin, il devient la scène
+principale et le Kotlin part d'un coup, avec ses tests. Chaque étape garde les
+deux jeux jouables et les tests verts ; `tests/gdunit/wildgrass/` teste le jeu
+sur le moteur.
+
+L'affichage du moteur (320 × 240 × 4) est appliqué par `game/main.gd` tant que
+le Kotlin garde son `SubViewport` ; il passera dans `config/display.json`.
 
 1. **Le cœur** : cartes, portes, joueur, marche, caméra, affichage.
    - Les 7 cartes passent en `WgMap` (`Entities`, points d'apparition `WgSpawnPoint`,
