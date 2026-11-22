@@ -7,7 +7,7 @@ import godot.core.Vector2
 
 /**
  * Ce que le jeu appelle de l'eau : les tuiles qui portent la donnée perso
- * `water` du TileSet (voir docs/tilesets.md).
+ * `reflects` du TileSet (voir docs/tilesets.md).
  *
  * Deux composants s'en servent — le reflet d'un personnage, et l'ombre d'un
  * Pokémon en vol qui bleuit au-dessus de la mer —, d'où ce petit atelier
@@ -17,7 +17,7 @@ object Water {
 
 	private const val LEVEL = "Level"
 	private const val BACKGROUND = "Background"
-	private const val NAME = "water"
+	private const val NAME = "reflects"
 
 	/** La carte où vit ce nœud, en remontant ses parents. */
 	fun levelOf(node: Node): Node? {

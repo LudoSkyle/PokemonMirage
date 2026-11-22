@@ -182,6 +182,13 @@ rangées de la même façon — les trois états aux colonnes 6, 7, 8 de la rang
 0 — et s'ajoute à `FRONTS` dans `TallGrass.kt`. La Route 1 a les
 siennes (`12` et `13`, voir « Les terrains de la Route 1 »).
 
+Sur le moteur, c'est la touffe dressée qui le dit, dans ses données :
+`front_source` (`custom_data_layer_4`, entier) la source de sa moitié basse
+(`9` pour `5:6,0`, `13` pour `12:6,0`), et `rustle` (`custom_data_layer_5`,
+tableau) ses états quand elle bruisse, `[Vector2i(7, 0), Vector2i(8, 0),
+Vector2i(8, 0), Vector2i(7, 0)]`. Une nouvelle planche d'herbe les porte sur sa
+touffe dressée.
+
 Deux essais écartés, pour mémoire : un cache d'herbe attaché au personnage (il
 glisse sur l'herbe pendant le pas), et la touffe qui reste couchée tant qu'on
 est dessus, comme dans le projet de référence (le personnage n'a plus l'air
@@ -245,7 +252,7 @@ matériau** — une ligne, comme pour une collision. `steps_per_second` et
 
 ### L'eau où l'on se mire
 
-Une seconde donnée perso, **`water`** (`custom_data_layer_1`, booléen), dit
+Une seconde donnée perso, **`reflects`** (`custom_data_layer_1`, booléen), dit
 qu'une tuile est de l'eau **pleine** : on s'y reflète. Cinq tuiles la portent —
 la mer `5:6,32`, l'eau claire `5:9,31`, l'eau profonde `5:5,34` `5:6,34`
 `5:6,35`.
@@ -330,8 +337,8 @@ Les rochers :
   est bleu et pas clair s'en va, l'écume reste). Les reflets se rangent juste
   au-dessus de `Ground` : le sable du bord les recouvre. D'une seule pièce, le
   reflet s'étalait sur le sable ;
-- **les données `water` et `footprints`** : l'eau, l'eau profonde, les bords `sand…`
-  et `shore…` portent `water` (reflet, ombre bleue des volants) ; `sand5` porte
+- **les données `reflects` et `footprints`** : l'eau, l'eau profonde, les bords `sand…`
+  et `shore…` portent `reflects` (reflet, ombre bleue des volants) ; `sand5` porte
   `footprints` (traces de pas). Sur la Route 1 cela ne change rien à pied — on n'y
   touche jamais l'eau — sauf l'ombre des volants au-dessus de la rivière ;
 - **les coins rentrants du sable ne sont pas rangés comme ceux des falaises** :
@@ -394,7 +401,7 @@ rentrants `i j / k l`.
   anneaux l'un dans l'autre, roche puis herbe, font la falaise à deux étages
   qui borde chaque terre ; sous l'anneau de roche, le sol est du sable.
 - **L'eau porte le shader**, sable bordé d'eau compris : il ne touche que le
-  bleu. Elle ne porte **pas** la donnée `water` : la rivière est au fond d'un
+  bleu. Elle ne porte **pas** la donnée `reflects` : la rivière est au fond d'un
   ravin, on ne s'y mire pas depuis un pont.
 - **Les ombres sont translucides** dans la planche (arbres, falaises,
   rochers) et le restent dans `route.png` : le moteur les fond sur ce qu'il y

@@ -233,7 +233,7 @@ se voit aussitôt dans l'eau.
   de 5 px pour le coller aux pieds — le bas d'une image de personnage est
   transparent sur deux ou trois pixels, et le miroir double cet écart.
 - Il n'apparaît que si **la case qui commence sous cette ligne est de l'eau**,
-  ce que déclare la donnée perso `water` de la tuile
+  ce que déclare la donnée perso `reflects` de la tuile
   ([tilesets.md](tilesets.md)) : au-dessus du sable ou d'un ponton, rien.
 - Les reflets vivent dans un `Background/Reflections` créé au besoin, **juste
   au-dessus du calque d'eau**. Le sable, les pontons et le reste du décor se

@@ -246,8 +246,8 @@ func test_island_paths() -> void:
 			run = run + 1 if sea_rocks.get_cell_source_id(Vector2i(x, y)) == ROUTE and is_sea(Vector2i(x, y)) else 0
 			line = maxi(line, run)
 	check("les rochers ne font pas de ligne droite", line <= 3, "%d" % line)
-	check("de l'eau, on s'y reflete : la mer porte la donnee water, liseré compris ; le sable de la plage garde les traces", ground.get_cell_tile_data(Vector2i(2, 20)).get_custom_data("water") == true
-		and ground.get_cell_tile_data(Vector2i(28, 35)).get_custom_data("footprints") == true and ground.get_cell_tile_data(Vector2i(28, 29)).get_custom_data("water") == false)
+	check("de l'eau, on s'y reflete : la mer porte la donnee reflects, liseré compris ; le sable de la plage garde les traces", ground.get_cell_tile_data(Vector2i(2, 20)).get_custom_data("reflects") == true
+		and ground.get_cell_tile_data(Vector2i(28, 35)).get_custom_data("footprints") == true and ground.get_cell_tile_data(Vector2i(28, 29)).get_custom_data("reflects") == false)
 
 	# Le decor ferme la carte : on n'atteint ni l'eau, ni le bord, hors de la trouee du nord.
 	var wet := 0
