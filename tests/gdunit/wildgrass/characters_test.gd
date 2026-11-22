@@ -214,3 +214,36 @@ func test_the_speaker_s_name_sits_inside_its_frame() -> void:
 	var width := font.get_string_size(name_label.text, HORIZONTAL_ALIGNMENT_LEFT, -1, name_label.get_theme_font_size(&"font_size")).x
 	# Seven game pixels each side, as the Kotlin box.
 	assert_float((box.get_node(^"Speaker") as Control).size.x).is_greater_equal(width + 14.0)
+
+
+func test_people_stand_in_the_tall_grass_up_to_the_waist_and_make_it_rustle() -> void:
+	var player := await _to_island_player()
+	var grass := Wildgrass.maps.current.get_node(^"Background/Grass") as TileMapLayer
+	var front := Wildgrass.grass.front_of(grass)
+	assert_object(front).is_not_null()
+	var watcher := Wildgrass.maps.current.get_node(^"World/Entities/GrassWatcher") as WgWalker
+	# The island's tufts are the route's: their front strip is source 13.
+	assert_int(grass.get_cell_source_id(watcher.cell)).is_equal(12)
+	assert_int(front.get_cell_source_id(watcher.cell)).is_equal(13)
+	# The player steps into a tuft beside the watcher: it bends.
+	for direction: Vector2i in [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]:
+		var into := watcher.cell + direction
+		if grass.get_cell_source_id(into) == -1 or Wildgrass.walkers.at(into) != null:
+			continue
+		player.place_at(into - direction, 0, direction)
+		if player.step(direction):
+			for frame in 30:
+				if grass.get_cell_atlas_coords(into) != Vector2i(6, 0):
+					break
+				await get_tree().process_frame
+			assert_that(grass.get_cell_atlas_coords(into)).is_not_equal(Vector2i(6, 0))
+			return
+	fail("no tuft to step into beside the watcher")
+
+
+func test_people_see_themselves_in_the_sea() -> void:
+	var player := await _to_island_player()
+	var ground := Wildgrass.maps.current.get_node(^"Background/Ground") as TileMapLayer
+	var sea := Vector2i(2, 20)
+	assert_bool(ground.get_cell_tile_data(sea).get_custom_data(&"reflects")).is_true()
+	assert_bool(Wildgrass.maps.current.get_node(^"World/Entities/Roland").reflects).is_true()

@@ -196,8 +196,8 @@ d'une plage : en surfant, on ne sortira pas de la carte. **Jamais en ligne
 droite, et aucun là où il n'a rien entouré** — la mer du sud-est reste
 ouverte.
 
-**L'eau reflète, le sable garde les traces** : la mer porte la donnée `water`
-et le sable des plages la donnée `sand` ([tilesets.md](tilesets.md)). Le bord
+**L'eau reflète, le sable garde les traces** : la mer porte la donnée `reflects`
+et le sable des plages la donnée `footprints` ([tilesets.md](tilesets.md)). Le bord
 du sable est posé à part, par-dessus l'eau (calque `Shore`), pour qu'un reflet
 passe dessous au lieu de s'étaler sur le sable. Au-dessus de l'eau, l'ombre
 d'un Pokémon volant bleuit.
