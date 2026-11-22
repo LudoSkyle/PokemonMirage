@@ -209,7 +209,7 @@ d'où le zigzag. En courant, les paires se suivent deux fois plus vite.
   premier personnage qui marche sur la carte, **juste au-dessus du calque du
   sol** : tout le reste du décor se dessine par-dessus.
 - **Ce qui est du sable se déclare dans le TileSet**, une fois par tuile — la
-  donnée perso `sand`, voir [tilesets.md](tilesets.md). Rien n'est codé en dur
+  donnée perso `footprints`, voir [tilesets.md](tilesets.md). Rien n'est codé en dur
   ici, et une serviette posée sur le sable ne garde pas de traces.
 - La planche est `assets/levels/footprints.png`, fabriquée par
   `tools/footprint_tiles.py` : huit cases de 8 px, une par direction et par

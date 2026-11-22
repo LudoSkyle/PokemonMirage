@@ -46,6 +46,12 @@ func _to_island(player: WgWalker) -> Node:
 	return map.get_node(map.entities)
 
 
+func _to_island_player() -> WgWalker:
+	var player := await _start()
+	await _to_island(player)
+	return player
+
+
 func _open_box() -> WgMessageBox:
 	for frame in 60:
 		if Wildgrass.dialogue.box != null and Wildgrass.dialogue.is_open():
@@ -155,3 +161,56 @@ func test_the_guard_turns_the_player_back_from_the_north_passage() -> void:
 		await get_tree().process_frame
 	assert_that(player.cell).is_equal(passage + Vector2i.DOWN)
 	assert_that(guard.cell).is_equal(passage + Vector2i.LEFT)
+
+
+func test_people_leave_mirage_s_prints_in_the_sand() -> void:
+	var player := await _to_island_player()
+	var sand := Vector2i(-1, -1)
+	# A cell of the beach drawn on top with sand: a shell lying there keeps none.
+	for cell in [Vector2i(30, 35), Vector2i(31, 35), Vector2i(30, 36), Vector2i(29, 36)]:
+		if _keeps_prints(cell):
+			sand = cell
+			break
+	assert_that(sand).is_not_equal(Vector2i(-1, -1))
+	var stepped := false
+	for direction: Vector2i in [Vector2i.DOWN, Vector2i.UP, Vector2i.LEFT, Vector2i.RIGHT]:
+		player.place_at(sand, 0, direction)
+		if player.step(direction):
+			stepped = true
+			break
+	assert_bool(stepped).is_true()
+	for frame in 60:
+		if not player.is_moving:
+			break
+		await get_tree().process_frame
+	# The player's pair on the cell it left; the children running on the beach
+	# nearby leave theirs too.
+	var centre := Wildgrass.walkers.tiles.center_of(sand)
+	var mine := Wildgrass.footprints.prints.filter(func(mark: Sprite2D) -> bool: return mark.global_position.distance_to(centre) < 10.0)
+	assert_int(mine.size()).is_equal(2)
+	if mine.is_empty():
+		return
+	var mark := mine[0] as Sprite2D
+	assert_str(mark.texture.resource_path).ends_with("assets/levels/footprints.png")
+	assert_bool(mark.region_enabled).is_true()
+
+
+func _keeps_prints(cell: Vector2i) -> bool:
+	var centre := Wildgrass.walkers.tiles.center_of(cell)
+	var top := Wildgrass.footprints.ground_at(centre)
+	if top == null:
+		return false
+	var data := top.get_cell_tile_data(top.local_to_map(top.to_local(centre)))
+	return data != null and data.get_custom_data(&"footprints") == true
+
+
+func test_the_speaker_s_name_sits_inside_its_frame() -> void:
+	await _start()
+	Wildgrass.dialogue.say("Bonjour.", {"speaker": "Mémé Odile"})
+	var box := await _open_box()
+	await get_tree().process_frame
+	var name_label := box.get_node(^"Speaker/Name") as Label
+	var font := name_label.get_theme_font(&"font")
+	var width := font.get_string_size(name_label.text, HORIZONTAL_ALIGNMENT_LEFT, -1, name_label.get_theme_font_size(&"font_size")).x
+	# Seven game pixels each side, as the Kotlin box.
+	assert_float((box.get_node(^"Speaker") as Control).size.x).is_greater_equal(width + 14.0)

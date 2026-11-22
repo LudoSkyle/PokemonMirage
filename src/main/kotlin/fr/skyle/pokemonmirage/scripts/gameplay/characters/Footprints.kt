@@ -27,7 +27,7 @@ import kotlin.math.abs
  * accroché au personnage, qui peut repartir, courir ou changer de carte.
  *
  * **Ce qui est du sable se déclare dans le TileSet**, pas ici : la tuile porte
- * la donnée perso `sand` (voir docs/tilesets.md). On lit le **calque le plus
+ * la donnée perso `footprints` (voir docs/tilesets.md). On lit le **calque le plus
  * haut** qui couvre la case — un ponton posé par-dessus le sable n'en est pas,
  * et on n'y laisse donc pas de traces.
  */
@@ -196,7 +196,7 @@ class Footprints : Node() {
 		private const val HOLDER = "Footprints"
 
 		/** La donnée perso du TileSet qui dit qu'une tuile se foule et garde la marque du pied. */
-		private const val SAND = "sand"
+		private const val SAND = "footprints"
 
 		private const val FOOTPRINT = "res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/characters/footprint.tscn"
 
