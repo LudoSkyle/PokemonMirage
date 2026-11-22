@@ -1,0 +1,7 @@
+{
+	"pockets": [
+		{ "id": "items", "name": "Objets" },
+		{ "id": "key_items", "name": "Objets rares", "reveal": true },
+		{ "id": "balls", "name": "Poké Balls" }
+	]
+}

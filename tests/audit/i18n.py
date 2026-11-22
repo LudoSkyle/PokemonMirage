@@ -3,7 +3,7 @@
 Les textes sont ecrits en francais dans les scenes et le code ; on les releve
 ici et on cherche chacun parmi les msgid. Usage : tests/run.sh i18n
 """
-import glob, re, sys
+import json, glob, re, sys
 
 ROOT = "src/main/kotlin/fr/skyle/pokemonmirage/"
 # Libelles qui se lisent pareil dans toutes les langues.
@@ -42,8 +42,16 @@ def sources():
         for text in re.findall(r'^metadata/location = "(.*)"$', body, re.M):
             add(text, path)
         # Le nom d'un personnage, affiche au-dessus de la boite de dialogue.
-        for text in re.findall(r'^display_name = "(.*)"$', body, re.M):
+        for text in re.findall(r'^(?:display_name|speaker) = "(.*)"$', body, re.M):
             add(text, path)
+
+    # Le jeu sur le moteur : les objets (items/*.tres), les noms des poches.
+    for path in sorted(glob.glob("items/*.tres")):
+        body = open(path, encoding="utf-8").read()
+        for text in re.findall(r'^(?:name|description|plural) = "((?:[^"\\]|\\.)*)"$', body, re.M):
+            add(text.replace('\\"', '"').replace("\\n", "\n"), path)
+    for pocket in json.load(open("config/bag.json", encoding="utf-8")).get("pockets", []):
+        add(pocket["name"], "config/bag.json")
 
     for path in sorted(glob.glob(ROOT + "scripts/**/*.kt", recursive=True)):
         body = open(path, encoding="utf-8").read()

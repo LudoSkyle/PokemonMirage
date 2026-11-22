@@ -85,6 +85,7 @@ func test_a_find_is_found_once() -> void:
 	await _go_to("route_1", &"")
 	assert_str(await _read(player, Vector2i(20, 12), Vector2i(20, 11))).contains("Vous trouvez une Potion !")
 	assert_bool(Wildgrass.story.has(&"found_route_potion")).is_true()
+	assert_int(Wildgrass.bag.count(&"potion")).is_equal(1)
 	Wildgrass.dialogue.close()
 	await get_tree().process_frame
 	Wildgrass.walkers.interact(player)

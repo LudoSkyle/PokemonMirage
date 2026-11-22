@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://game/ui/item_reveal.gd" id="1_reveal"]
+[ext_resource type="Texture2D" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/ui/frames/rse_01.png" id="2_frame"]
+
+[node name="ItemReveal" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_reveal")
+
+[node name="Panel" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -128.0
+offset_right = 24.0
+offset_bottom = -80.0
+mouse_filter = 2
+
+[node name="Frame" type="NinePatchRect" parent="Panel"]
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+mouse_filter = 2
+texture = ExtResource("2_frame")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Icon" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+expand_mode = 1
