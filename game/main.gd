@@ -4,7 +4,8 @@ extends Node
 
 const PLAYER := preload("res://game/player.tscn")
 const PageTranslation := preload("res://game/page_translation.gd")
-const START_MAP := &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/ludo_bedroom.tscn"
+## Mirage's maps are found by name in their folder (`wildgrass/paths/maps`).
+const START_MAP := &"ludo_bedroom"
 
 ## The pause menu's entries and the options' names: Mirage's words.
 # i18n
@@ -40,6 +41,7 @@ func _ready() -> void:
 	Wildgrass.maps.door_used.connect(_leave)
 	_dress_menu()
 	_dress_options()
+	Wildgrass.hooks.add(&"save_summary", &"mirage_place", _summary_place)
 	Wildgrass.maps.traveller = PLAYER.instantiate()
 	await Wildgrass.maps.go_to(START_MAP, &"Spawn")
 
@@ -48,6 +50,7 @@ func _exit_tree() -> void:
 	Wildgrass.hooks.remove(&"map_built", &"mirage_characters")
 	Wildgrass.hooks.remove(&"map_built", &"mirage_story")
 	Wildgrass.maps.door_used.disconnect(_leave)
+	Wildgrass.hooks.remove(&"save_summary", &"mirage_place")
 	PageTranslation.uninstall(_translations)
 
 
@@ -139,3 +142,13 @@ func _dress_options() -> void:
 		if option.has("format"):
 			option["format"] = "%d %%"
 		options.add_option(renamed[0], option)
+
+
+## A game's card names its place as the map does: its `location` metadata,
+## in French, translated where it shows.
+func _summary_place(summary: Dictionary, _slot: int) -> Dictionary:
+	var map := Wildgrass.maps.current
+	if map != null:
+		summary["location"] = str(map.get_meta(&"location", ""))
+		summary["banner"] = str(map.get_meta(&"banner", ""))
+	return summary

@@ -759,7 +759,7 @@ polygon = PackedVector2Array(0, -3, 1, -1, 3, 0, 1, 1, 0, 3, -1, 1, -3, 0, -1, -
 [node name="MaisonLudo" type="Area2D" parent="Exits"]
 position = Vector2(168, 136)
 script = ExtResource("wg_door")
-target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/ludo_house.tscn"
+target_map = &"ludo_house"
 target_door = &"Entree"
 kind = 0
 direction = Vector2i(0, 1)
@@ -768,7 +768,7 @@ transition = &"fade"
 [node name="Bibliotheque" type="Area2D" parent="Exits"]
 position = Vector2(56, 472)
 script = ExtResource("wg_door")
-target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/library.tscn"
+target_map = &"library"
 target_door = &"Entree"
 kind = 0
 direction = Vector2i(0, 1)
@@ -777,7 +777,7 @@ transition = &"fade"
 [node name="Laboratoire" type="Area2D" parent="Exits"]
 position = Vector2(728, 136)
 script = ExtResource("wg_door")
-target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/lab_house.tscn"
+target_map = &"lab_house"
 target_door = &"Entree"
 kind = 0
 direction = Vector2i(0, 1)
@@ -786,7 +786,7 @@ transition = &"fade"
 [node name="MaisonNord" type="Area2D" parent="Exits"]
 position = Vector2(280, 152)
 script = ExtResource("wg_door")
-target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/orange_house_north.tscn"
+target_map = &"orange_house_north"
 target_door = &"Entree"
 kind = 0
 direction = Vector2i(0, 1)
@@ -795,7 +795,7 @@ transition = &"fade"
 [node name="MaisonSud" type="Area2D" parent="Exits"]
 position = Vector2(712, 536)
 script = ExtResource("wg_door")
-target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/orange_house_south.tscn"
+target_map = &"orange_house_south"
 target_door = &"Entree"
 kind = 0
 direction = Vector2i(0, 1)
@@ -804,7 +804,7 @@ transition = &"fade"
 [node name="Nord0" type="Area2D" parent="Exits"]
 position = Vector2(56, 8)
 script = ExtResource("wg_door")
-target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/route_1.tscn"
+target_map = &"route_1"
 target_door = &"Sud0"
 kind = 0
 direction = Vector2i(0, 1)
@@ -813,7 +813,7 @@ transition = &"fade"
 [node name="Nord1" type="Area2D" parent="Exits"]
 position = Vector2(72, 8)
 script = ExtResource("wg_door")
-target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/route_1.tscn"
+target_map = &"route_1"
 target_door = &"Sud1"
 kind = 0
 direction = Vector2i(0, 1)
@@ -822,7 +822,7 @@ transition = &"fade"
 [node name="Nord2" type="Area2D" parent="Exits"]
 position = Vector2(88, 8)
 script = ExtResource("wg_door")
-target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/route_1.tscn"
+target_map = &"route_1"
 target_door = &"Sud2"
 kind = 0
 direction = Vector2i(0, 1)

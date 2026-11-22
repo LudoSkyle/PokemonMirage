@@ -1,0 +1,13 @@
+# The engine's words, in French, where Mirage shows them: its texts are
+# written in English (docs/i18n.md: Mirage's own are French, translated in
+# en.po).
+msgid ""
+msgstr ""
+"Language: fr\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "Yes"
+msgstr "Oui"
+
+msgid "No"
+msgstr "Non"

@@ -68,7 +68,7 @@ def sources():
             add(text.replace("\\n", "\n"), path)
         for block in re.findall(r"# i18n\n.*?\[\n(.*?)\n\]", body, re.S):
             for text in re.findall(r'"((?:[^"\\]|\\.)*)"', block):
-                add(text, path)
+                add(text.replace("\\n", "\n"), path)
     return found
 
 
@@ -95,6 +95,9 @@ def main():
     wanted = sources()
     ok = True
     for po in sorted(glob.glob("locale/*.po")):
+        # fr.po holds the engine's words in French, not Mirage's texts.
+        if po.endswith("/fr.po"):
+            continue
         known = msgids(po)
         missing = [t for t in wanted if not known.get(t)]
         unused = [t for t in known if t and t not in wanted]

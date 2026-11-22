@@ -101,7 +101,7 @@ text = "Une bibliothèque pleine de livres.|Ils ont l'air très intéressants !"
 [node name="Entree" type="Area2D" parent="Exits"]
 position = Vector2(248, 216)
 script = ExtResource("wg_door")
-target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/start_island.tscn"
+target_map = &"start_island"
 target_door = &"MaisonNord"
 kind = 1
 direction = Vector2i(0, 1)
@@ -110,7 +110,7 @@ transition = &"fade"
 [node name="EntreeBis" type="Area2D" parent="Exits"]
 position = Vector2(264, 216)
 script = ExtResource("wg_door")
-target_map = &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/start_island.tscn"
+target_map = &"start_island"
 target_door = &"MaisonNord"
 kind = 1
 direction = Vector2i(0, 1)
