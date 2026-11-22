@@ -6,6 +6,22 @@ const PLAYER := preload("res://game/player.tscn")
 const PageTranslation := preload("res://game/page_translation.gd")
 const START_MAP := &"res://src/main/kotlin/fr/skyle/pokemonmirage/scenes/levels/ludo_bedroom.tscn"
 
+## The pause menu's entries and the options' names: Mirage's words.
+# i18n
+const WORDS: Array[String] = [
+	"Pokédex",
+	"Sac",
+	"Sauvegarder",
+	"Options",
+	"Debug",
+	"Quitter",
+	"Vitesse du texte",
+	"Langue",
+	"Musique",
+	"Cris des Pokémon",
+	"Autres sons",
+]
+
 var _translations: Array[Translation] = []
 
 
@@ -22,6 +38,8 @@ func _ready() -> void:
 	Wildgrass.hooks.add(&"map_built", &"mirage_characters", _swap_characters, -1)
 	Wildgrass.hooks.add(&"map_built", &"mirage_story", _follow_the_story, -1)
 	Wildgrass.maps.door_used.connect(_leave)
+	_dress_menu()
+	_dress_options()
 	Wildgrass.maps.traveller = PLAYER.instantiate()
 	await Wildgrass.maps.go_to(START_MAP, &"Spawn")
 
@@ -88,3 +106,36 @@ func _leave(_door: WgDoor) -> void:
 		var parts := rule.split(">")
 		if parts.size() == 2 and not parts[0].strip_edges().is_empty() and not parts[1].strip_edges().is_empty() and Wildgrass.story.has(StringName(parts[0].strip_edges())):
 			Wildgrass.story.set_flag(StringName(parts[1].strip_edges()))
+
+
+## The pause menu in Mirage's words and order: Pokédex, Bag, Save, Options,
+## Debug, Quit.
+func _dress_menu() -> void:
+	var menu := Wildgrass.menu
+	menu.add_entry(&"bag", "Sac", menu.open_bag)
+	menu.add_entry(&"save", "Sauvegarder", menu.open_save, "!save_disabled")
+	menu.add_entry(&"exit", "Quitter", menu.exit)
+	menu.remove_entry(&"options")
+	menu.add_entry(&"options", "Options", menu.open_options, "", &"debug" if &"debug" in menu.entries() else &"exit")
+
+
+## Mirage's options: the text speed from x0.5 to x4 (x1, 0.02 s a letter,
+## by default), the language, three volumes by steps of five.
+func _dress_options() -> void:
+	var options := Wildgrass.options
+	var dialogue := Wildgrass.dialogue
+	options.add_option(&"message_speed", {
+		"name": "Vitesse du texte",
+		"values": [0.5, 1.0, 2.0, 4.0],
+		"texts": ["x0.5", "x1", "x2", "x4"],
+		"default": 1.0,
+		"apply": func(factor: Variant) -> void: dialogue.letters_per_second = dialogue.config().letters_per_second * float(factor),
+	})
+	for renamed: Array in [[&"language", "Langue"], [&"music_volume", "Musique"], [&"cries_volume", "Cris des Pokémon"], [&"effects_volume", "Autres sons"]]:
+		var option: Dictionary = options.option(renamed[0]).duplicate()
+		if option.is_empty():
+			continue
+		option["name"] = renamed[1]
+		if option.has("format"):
+			option["format"] = "%d %%"
+		options.add_option(renamed[0], option)
