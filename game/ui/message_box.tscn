@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="PackedScene" path="res://addons/wildgrass/dialogue/message_box.tscn" id="1_box"]
 [ext_resource type="Script" path="res://game/ui/fine_frame.gd" id="2_frame"]
@@ -14,6 +14,10 @@ spacing_top = -1
 spacing_bottom = -1
 
 [sub_resource type="StyleBoxEmpty" id="empty"]
+
+[sub_resource type="StyleBoxEmpty" id="speaker_name"]
+content_margin_left = 7.0
+content_margin_right = 7.0
 
 [sub_resource type="StyleBoxTexture" id="choice_frame"]
 texture = ExtResource("5_choice_frame")
@@ -71,6 +75,7 @@ texture = ExtResource("3_art")
 
 [node name="Name" parent="Speaker" index="1"]
 custom_minimum_size = Vector2(0, 20)
+theme_override_styles/normal = SubResource("speaker_name")
 theme_override_colors/font_color = Color(0.345098, 0.345098, 0.313725, 1)
 theme_override_colors/font_shadow_color = Color(0.658824, 0.721569, 0.721569, 1)
 theme_override_constants/shadow_offset_x = 1
