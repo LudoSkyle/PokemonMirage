@@ -7,23 +7,6 @@ const PageTranslation := preload("res://game/page_translation.gd")
 ## Mirage's maps are found by name in their folder (`wildgrass/paths/maps`).
 const START_MAP := &"ludo_bedroom"
 
-## The pause menu's entries and the options' names: Mirage's words.
-# i18n
-const WORDS: Array[String] = [
-	"Pokédex",
-	"Sac",
-	"Sauvegarder",
-	"Options",
-	"Debug",
-	"Quitter",
-	"Vitesse du texte",
-	"Langue",
-	"Musique",
-	"Cris des Pokémon",
-	"Autres sons",
-	"Jouer",
-]
-
 ## False: no title, straight to the first map (the tests).
 @export var title := true
 
@@ -50,7 +33,7 @@ func _ready() -> void:
 	if title:
 		# The key on the title always opens the choice of a game: its cards
 		# hold "Nouvelle partie" and "Options".
-		Wildgrass.title.add_choice(&"play", "Jouer", Wildgrass.title.choose_game)
+		Wildgrass.title.add_choice(&"play", "wg.title.play", Wildgrass.title.choose_game)
 		Wildgrass.title.start()
 	else:
 		await Wildgrass.maps.go_to(START_MAP, &"Spawn")
@@ -121,38 +104,34 @@ func _leave(_door: WgDoor) -> void:
 			Wildgrass.story.set_flag(StringName(parts[1].strip_edges()))
 
 
-## The pause menu in Mirage's words and order: Pokédex, Bag, Save, Options,
-## Debug, Quit.
+## The pause menu in Mirage's order: Pokédex, Bag, Save, Options, Debug,
+## Quit. Its words are the engine's keys, given in locale/*.po.
 func _dress_menu() -> void:
 	var menu := Wildgrass.menu
-	menu.add_entry(&"bag", "Sac", menu.open_bag)
-	menu.add_entry(&"save", "Sauvegarder", menu.open_save, "!save_disabled")
-	menu.add_entry(&"exit", "Quitter", menu.exit)
 	menu.remove_entry(&"options")
-	menu.add_entry(&"options", "Options", menu.open_options, "", &"debug" if &"debug" in menu.entries() else &"exit")
+	menu.add_entry(&"options", "wg.menu.options", menu.open_options, "", &"debug" if &"debug" in menu.entries() else &"exit")
 
 
 ## Mirage's options: the text speed from x0.5 to x4 (x1, 0.02 s a letter,
 ## by default), under an id of its own so that a speed the engine's option
-## kept is not read as Mirage's; the language, three volumes by steps of five.
+## kept is not read as Mirage's; the language, three volumes by steps of five,
+## written "100 %" as French does.
 func _dress_options() -> void:
 	var options := Wildgrass.options
 	var dialogue := Wildgrass.dialogue
 	options.add_option(&"text_speed", {
-		"name": "Vitesse du texte",
+		"name": "wg.options.text_speed",
 		"values": [0.5, 1.0, 2.0, 4.0],
 		"texts": ["x0.5", "x1", "x2", "x4"],
 		"default": 1.0,
 		"apply": func(factor: Variant) -> void: dialogue.letters_per_second = dialogue.config().letters_per_second * float(factor),
 	})
-	for renamed: Array in [[&"language", "Langue"], [&"music_volume", "Musique"], [&"cries_volume", "Cris des Pokémon"], [&"effects_volume", "Autres sons"]]:
-		var option: Dictionary = options.option(renamed[0]).duplicate()
+	for id: StringName in [&"music_volume", &"cries_volume", &"effects_volume"]:
+		var option: Dictionary = options.option(id).duplicate()
 		if option.is_empty():
 			continue
-		option["name"] = renamed[1]
-		if option.has("format"):
-			option["format"] = "%d %%"
-		options.add_option(renamed[0], option)
+		option["format"] = "%d %%"
+		options.add_option(id, option)
 
 
 ## A game's card names its place as the map does: its `location` metadata,

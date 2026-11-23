@@ -1,13 +1,343 @@
-# The engine's words, in French, where Mirage shows them: its texts are
-# written in English (docs/i18n.md: Mirage's own are French, translated in
-# en.po).
+# The engine's words, in French (docs/i18n.md): the engine writes none, each
+# is a key (vendor/WildgrassEngine/docs/design/05b-text-keys.md). Mirage's
+# own texts are French and translated in en.po.
 msgid ""
 msgstr ""
 "Language: fr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 
-msgid "Yes"
+msgid "wg.yes"
 msgstr "Oui"
 
-msgid "No"
+msgid "wg.no"
 msgstr "Non"
+
+msgid "wg.cancel"
+msgstr "Annuler"
+
+msgid "wg.menu.pokedex"
+msgstr "Pokédex"
+
+msgid "wg.menu.bag"
+msgstr "Sac"
+
+msgid "wg.menu.save"
+msgstr "Sauvegarder"
+
+msgid "wg.menu.options"
+msgstr "Options"
+
+msgid "wg.menu.debug"
+msgstr "Debug"
+
+msgid "wg.menu.exit"
+msgstr "Quitter"
+
+msgid "wg.title.play"
+msgstr "Jouer"
+
+msgid "wg.title.options"
+msgstr "Options"
+
+msgid "wg.title.quit"
+msgstr "Quitter"
+
+msgid "wg.title.prompt"
+msgstr "Appuyez sur {key:ui_accept}"
+
+msgid "wg.options.text_speed"
+msgstr "Vitesse du texte"
+
+msgid "wg.options.text_speed_help"
+msgstr "Choisissez la vitesse d'écriture des messages."
+
+msgid "wg.options.slow"
+msgstr "Lente"
+
+msgid "wg.options.normal"
+msgstr "Normale"
+
+msgid "wg.options.fast"
+msgstr "Rapide"
+
+msgid "wg.options.message_frame"
+msgstr "Cadre des messages"
+
+msgid "wg.options.message_frame_help"
+msgstr "Choisissez le cadre de la boîte de dialogue."
+
+msgid "wg.options.frame_sample"
+msgstr "Voici à quoi ressemblent les messages."
+
+msgid "wg.options.volume"
+msgstr "Volume"
+
+msgid "wg.options.volume_help"
+msgstr "Réglez le volume de la musique et des sons."
+
+msgid "wg.options.music"
+msgstr "Musique"
+
+msgid "wg.options.music_help"
+msgstr "Réglez le volume de la musique."
+
+msgid "wg.options.effects"
+msgstr "Autres sons"
+
+msgid "wg.options.effects_help"
+msgstr "Réglez le volume des bruitages et des jingles."
+
+msgid "wg.options.cries"
+msgstr "Cris des Pokémon"
+
+msgid "wg.options.cries_help"
+msgstr "Réglez le volume des cris des Pokémon."
+
+msgid "wg.options.language"
+msgstr "Langue"
+
+msgid "wg.options.language_help"
+msgstr "Choisissez la langue du jeu."
+
+msgid "wg.save.question"
+msgstr "Voulez-vous sauvegarder la partie ?"
+
+msgid "wg.save.overwrite"
+msgstr "Une sauvegarde existe déjà.\nVoulez-vous l'écraser ?"
+
+msgid "wg.save.saved"
+msgstr "La partie a été sauvegardée."
+
+msgid "wg.save.failed"
+msgstr "La partie n'a pas pu être sauvegardée."
+
+msgid "wg.save.which_file"
+msgstr "Sauvegarder dans quelle partie ?"
+
+msgid "wg.save.file_choice"
+msgstr "Partie {slot} : {place}, {time}"
+
+msgid "wg.save.new_file_choice"
+msgstr "Partie {slot} : nouvelle"
+
+msgid "wg.slots.card"
+msgstr "Partie {slot}\n{place}   {time}"
+
+msgid "wg.slots.empty_card"
+msgstr "Partie {slot}\nNouvelle partie"
+
+msgid "wg.slots.damaged_card"
+msgstr "Partie {slot}\nCette sauvegarde est abîmée."
+
+msgid "wg.slots.options"
+msgstr "Options"
+
+msgid "wg.slots.continue"
+msgstr "Continuer"
+
+msgid "wg.slots.new_game"
+msgstr "Nouvelle partie"
+
+msgid "wg.slots.erase"
+msgstr "Effacer"
+
+msgid "wg.slots.erase_question"
+msgstr "Effacer la partie {slot} ?"
+
+msgid "wg.slots.load_failed"
+msgstr "Cette partie n'a pas pu être chargée."
+
+msgid "wg.bag.selected"
+msgstr "Objet choisi : {item}."
+
+msgid "wg.bag.use"
+msgstr "Utiliser"
+
+msgid "wg.bag.toss"
+msgstr "Jeter"
+
+msgid "wg.bag.toss_count"
+msgstr "Combien de {item} jeter ?"
+
+msgid "wg.bag.toss_confirm"
+msgstr "Jeter {item} x{count} ?"
+
+msgid "wg.pocket.items"
+msgstr "Objets"
+
+msgid "wg.pocket.medicine"
+msgstr "Soins"
+
+msgid "wg.pocket.balls"
+msgstr "Poké Balls"
+
+msgid "wg.pocket.tms"
+msgstr "CT"
+
+msgid "wg.pocket.berries"
+msgstr "Baies"
+
+msgid "wg.pocket.key_items"
+msgstr "Objets rares"
+
+msgid "wg.item.found"
+msgstr "Vous trouvez {item} !"
+
+msgid "wg.item.no_room"
+msgstr "Plus de place pour {item}."
+
+msgid "wg.pokedex.national"
+msgstr "Pokédex national"
+
+msgid "wg.pokedex.header"
+msgstr "{dex}   Vus {seen}   Pris {caught}"
+
+msgid "wg.pokedex.size"
+msgstr "Taille {height} m   Poids {weight} kg"
+
+msgid "wg.wild.appeared"
+msgstr "Un {name} sauvage apparaît !"
+
+msgid "wg.weather.clear"
+msgstr "Beau temps"
+
+msgid "wg.back"
+msgstr "Retour"
+
+msgid "wg.debug.title"
+msgstr "Debug"
+
+msgid "wg.debug.engine"
+msgstr "Moteur"
+
+msgid "wg.debug.game"
+msgstr "Jeu"
+
+msgid "wg.debug.fill_bag"
+msgstr "Remplir le sac"
+
+msgid "wg.debug.bag_filled"
+msgstr "Des objets de test ont été ajoutés au sac."
+
+msgid "wg.debug.empty_bag"
+msgstr "Vider le sac"
+
+msgid "wg.debug.bag_emptied"
+msgstr "Le sac a été vidé."
+
+msgid "wg.debug.quests"
+msgstr "Quêtes"
+
+msgid "wg.debug.quest_start_over"
+msgstr "Recommencer"
+
+msgid "wg.debug.quest_next"
+msgstr "Objectif suivant"
+
+msgid "wg.debug.quest_finish"
+msgstr "Terminer"
+
+msgid "wg.debug.quest_started_over"
+msgstr "{quest} : recommencée."
+
+msgid "wg.debug.quest_not_started"
+msgstr "{quest} n'a pas commencé."
+
+msgid "wg.debug.quest_already_done"
+msgstr "{quest} est déjà terminée."
+
+msgid "wg.debug.quest_finished"
+msgstr "{quest} est terminée."
+
+msgid "wg.debug.quest_advanced"
+msgstr "{quest} : un objectif de plus."
+
+msgid "wg.debug.hour_real"
+msgstr "Heure : réelle"
+
+msgid "wg.debug.hour"
+msgstr "Heure : {moment}"
+
+msgid "wg.debug.moment.dawn"
+msgstr "aube"
+
+msgid "wg.debug.moment.day"
+msgstr "jour"
+
+msgid "wg.debug.moment.dusk"
+msgstr "crépuscule"
+
+msgid "wg.debug.moment.night"
+msgstr "nuit"
+
+msgid "wg.debug.weather"
+msgstr "Météo : {name}"
+
+msgid "wg.debug.weather_here"
+msgstr "(cette carte : {name})"
+
+msgid "wg.debug.species"
+msgstr "Espèces"
+
+msgid "wg.debug.fill_pokedex"
+msgstr "Remplir le Pokédex"
+
+msgid "wg.debug.pokedex_filled"
+msgstr "Le Pokédex a été rempli."
+
+msgid "wg.debug.empty_pokedex"
+msgstr "Vider le Pokédex"
+
+msgid "wg.debug.pokedex_emptied"
+msgstr "Le Pokédex a été vidé."
+
+msgid "wg.debug.speed"
+msgstr "Vitesse : x{speed}"
+
+msgid "wg.debug.warp"
+msgstr "Se téléporter"
+
+msgid "wg.debug.reload"
+msgstr "Recharger la carte"
+
+msgid "wg.debug.walls_on"
+msgstr "Traverser les murs : oui"
+
+msgid "wg.debug.walls_off"
+msgstr "Traverser les murs : non"
+
+msgid "wg.debug.encounters_always"
+msgstr "Rencontres : toujours"
+
+msgid "wg.debug.encounters_never"
+msgstr "Rencontres : jamais"
+
+msgid "wg.debug.encounters_chance"
+msgstr "Rencontres : au hasard"
+
+msgid "wg.debug.followers_on"
+msgstr "Suiveurs : oui"
+
+msgid "wg.debug.followers_off"
+msgstr "Suiveurs : non"
+
+msgid "wg.debug.save_here"
+msgstr "Sauvegarder ici"
+
+msgid "wg.debug.species_heading"
+msgstr "Espèces : {count}, {missing} incomplètes"
+
+msgid "wg.debug.no_species"
+msgstr "Aucune espèce."
+
+msgid "wg.debug.generation"
+msgstr "Génération"
+
+msgid "wg.debug.no_name"
+msgstr "pas de nom"
+
+msgid "wg.debug.no_description"
+msgstr "pas de description"
+
+msgid "wg.debug.no_picture"
+msgstr "Pas d'image :"

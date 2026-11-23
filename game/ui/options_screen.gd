@@ -49,13 +49,9 @@ func _on_input(event: InputEvent) -> bool:
 	return true
 
 
-func _process(delta: float) -> void:
-	if _keys == null or is_closed() or Wildgrass.screens.top() != self:
-		return
-	for key in _keys.repeats(delta):
-		# Left and right change a setting, not a place in a list: no repeat.
-		if key == "up" or key == "down":
-			_press(key)
+## Left and right change a setting, not a place in a list: no repeat.
+func _repeats(key: String) -> bool:
+	return key == "up" or key == "down"
 
 
 ## The option of the row under the cursor; none on Back.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3]
+[gd_scene load_steps=15 format=3]
 
 [ext_resource type="PackedScene" path="res://addons/wildgrass/dialogue/message_box.tscn" id="1_box"]
 [ext_resource type="Script" path="res://game/ui/fine_frame.gd" id="2_frame"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" path="res://src/main/kotlin/fr/skyle/pokemonmirage/assets/ui/cursor.png" id="6_cursor"]
 [ext_resource type="Script" path="res://game/ui/pixel_shadow.gd" id="7_shadow"]
 [ext_resource type="Script" path="res://game/ui/button_label.gd" id="8_button_label"]
-[ext_resource type="Script" path="res://game/ui/message_box.gd" id="9_box_script"]
 
 [sub_resource type="FontVariation" id="dialogue_font"]
 base_font = ExtResource("4_font")
@@ -36,7 +35,7 @@ content_margin_right = 8.0
 content_margin_bottom = 8.0
 
 [node name="MessageBox" instance=ExtResource("1_box")]
-script = ExtResource("9_box_script")
+beside_gap = 2.0
 waiting = NodePath("")
 portrait = NodePath("")
 choices = NodePath("ChoiceFrame")

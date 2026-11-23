@@ -43,6 +43,11 @@ func _on_close() -> void:
 		_model.free()
 
 
+## A column: up and down alone go again.
+func _repeats(key: String) -> bool:
+	return key == "up" or key == "down"
+
+
 func _on_input(event: InputEvent) -> bool:
 	if _keys == null or _busy:
 		return super(event)
@@ -59,14 +64,6 @@ func _on_input(event: InputEvent) -> bool:
 		_:
 			return false
 	return true
-
-
-func _process(delta: float) -> void:
-	if _keys == null or _busy or is_closed() or not visible or Wildgrass.screens.top() != self:
-		return
-	for key in _keys.repeats(delta):
-		if key == "up" or key == "down":
-			_move(-1 if key == "up" else 1)
 
 
 ## The entries whose condition holds now, as Mirage's lines.
