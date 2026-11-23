@@ -203,14 +203,14 @@ func test_held_keys_repeat_after_a_delay() -> void:
 	# Held: the action stays pressed after its press.
 	Input.action_press("ui_down")
 	await _tap("ui_down")
-	_bag._process(0.3)
+	Wildgrass.dialogue.repeat_keys(0.3)
 	assert_str(_text(^"Description")).starts_with("Un spray plus concentré")
-	_bag._process(0.06)
+	Wildgrass.dialogue.repeat_keys(0.06)
 	assert_str(_text(^"Description")).starts_with("Le spray des grands jours")
-	_bag._process(0.11)
+	Wildgrass.dialogue.repeat_keys(0.11)
 	assert_str(_text(^"Description")).starts_with("Un spray qui chasse")
 	Input.action_release("ui_down")
-	_bag._process(0.5)
+	Wildgrass.dialogue.repeat_keys(0.5)
 	assert_str(_text(^"Description")).starts_with("Un spray qui chasse")
 
 
@@ -218,7 +218,7 @@ func test_a_held_left_or_right_turns_one_pocket_only() -> void:
 	await _open()
 	Input.action_press("ui_right")
 	await _tap("ui_right")
-	_bag._process(1.0)
-	_bag._process(1.0)
+	Wildgrass.dialogue.repeat_keys(1.0)
+	Wildgrass.dialogue.repeat_keys(1.0)
 	Input.action_release("ui_right")
 	assert_str(_text(^"Title")).is_equal("Objets rares")

@@ -60,6 +60,11 @@ func _on_open(args: Dictionary) -> void:
 		_keys = MenuKeys.new(dialogue)
 
 
+## The cards go by left and right: up and down do not repeat.
+func _repeats(key: String) -> bool:
+	return key == "left" or key == "right"
+
+
 func _on_input(event: InputEvent) -> bool:
 	if _keys == null:
 		return false
@@ -77,10 +82,6 @@ func _process(delta: float) -> void:
 	if is_closed():
 		return
 	_clock += delta
-	if _keys != null and not _busy and Wildgrass.screens.top() == self:
-		for key in _keys.repeats(delta):
-			if key == "left" or key == "right":
-				_move(-1 if key == "left" else 1)
 	# The row glides to the card chosen, slower and slower.
 	var strip := $Strip as Control
 	var goal := _target()

@@ -77,8 +77,11 @@ le Kotlin garde son `SubViewport` ; il passera dans `config/display.json`.
    remplacées sous les mêmes noms), la sauvegarde (trois emplacements, les
    cartes trouvées par leur nom grâce à `wildgrass/paths/maps`), l'écran titre
    et le choix d'une partie. `game/ui/choice_box.tscn` et `menu_keys.gd`
-   (la répétition des touches tenues) servent à tous. Les mots du moteur que
-   Mirage montre (Oui, Non) sont traduits dans `locale/fr.po`.
+   (la touche d'un événement) servent à tous. Le moteur n'écrit aucun
+   de ses mots : chacun est une clé (`wg.menu.bag`…) que Mirage donne en
+   français dans `locale/fr.po` et en anglais dans `locale/en.po`
+   (docs/i18n.md) ; la répétition des touches tenues et l'écart des choix
+   (`beside_gap`) sont ceux du moteur.
    `game/main.tscn` ouvre le titre ; `title = false` le saute (les tests).
    *Reste* : les sons des menus (étape 6), les outils Debug de Mirage
    (étape 7).

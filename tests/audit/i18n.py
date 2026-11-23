@@ -91,16 +91,28 @@ def msgids(path):
     return ids
 
 
+def engine_keys():
+    # Le moteur n'ecrit aucun de ses mots : chacun est une cle que le jeu donne
+    # dans chaque langue (la liste du moteur, docs/design/05b-text-keys.md).
+    body = open("vendor/WildgrassEngine/docs/design/05b-text-keys.md", encoding="utf-8").read()
+    return re.findall(r"^\| `(wg\.[a-z_.]+)` \|", body, re.M)
+
+
 def main():
     wanted = sources()
-    ok = True
+    keys = engine_keys()
+    ok = bool(keys)
     for po in sorted(glob.glob("locale/*.po")):
-        # fr.po holds the engine's words in French, not Mirage's texts.
+        known = msgids(po)
+        for key in keys:
+            if not known.get(key):
+                ok = False
+                print("  !! mot du moteur sans texte : %r  (%s)" % (key, po))
+        # fr.po ne tient que les mots du moteur : les textes de Mirage sont en francais.
         if po.endswith("/fr.po"):
             continue
-        known = msgids(po)
         missing = [t for t in wanted if not known.get(t)]
-        unused = [t for t in known if t and t not in wanted]
+        unused = [t for t in known if t and t not in wanted and t not in keys]
         print("%s : %d textes, %d traduits" % (po, len(wanted), len(wanted) - len(missing)))
         for text in missing:
             ok = False

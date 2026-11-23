@@ -31,7 +31,7 @@ func after_test() -> void:
 		Wildgrass.save.erase(slot)
 	Wildgrass.save.reset()
 	Wildgrass.title.remove_choice(&"play")
-	Wildgrass.title.add_choice(&"play", "Play", Wildgrass.title.play, "", &"options")
+	Wildgrass.title.add_choice(&"play", "wg.title.play", Wildgrass.title.play, "", &"options")
 	TranslationServer.set_locale(_locale)
 
 
